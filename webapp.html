@@ -1,0 +1,719 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Forex Analiz Bot</title>
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
+<style>
+  :root {
+    --bg: #080e1a;
+    --surface: #0f1825;
+    --card: #141f30;
+    --border: #1e2d42;
+    --green: #00d97e;
+    --green-dim: #00d97e22;
+    --gold: #f5c842;
+    --gold-dim: #f5c84222;
+    --red: #ff4757;
+    --red-dim: #ff475722;
+    --blue: #3d8bff;
+    --blue-dim: #3d8bff22;
+    --purple: #a855f7;
+    --purple-dim: #a855f722;
+    --text: #e8edf5;
+    --text-dim: #5a6a80;
+    --text-mid: #8899aa;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* ── Header ── */
+  .header {
+    padding: 20px 16px 12px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    border-bottom: 1px solid var(--border);
+    background: var(--surface);
+    position: sticky; top: 0; z-index: 10;
+  }
+  .header-logo {
+    width: 40px; height: 40px;
+    background: linear-gradient(135deg, #00d97e, #00b5ff);
+    border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px;
+  }
+  .header-info h1 { font-size: 16px; font-weight: 700; color: var(--text); }
+  .header-info p { font-size: 11px; color: var(--text-dim); margin-top: 1px; }
+  .header-badge {
+    margin-left: auto;
+    background: var(--green-dim);
+    color: var(--green);
+    border: 1px solid var(--green);
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 600;
+  }
+
+  /* ── Pages ── */
+  .page { display: none; padding: 0 0 80px; }
+  .page.active { display: block; }
+
+  /* ── Hero ── */
+  .hero {
+    background: linear-gradient(160deg, #0a1628 0%, #0d1f35 100%);
+    padding: 24px 16px 20px;
+    border-bottom: 1px solid var(--border);
+  }
+  .hero-greeting { font-size: 13px; color: var(--text-dim); margin-bottom: 4px; }
+  .hero-name { font-size: 22px; font-weight: 800; color: var(--text); }
+  .hero-status {
+    display: flex; gap: 8px; margin-top: 14px; flex-wrap: wrap;
+  }
+  .stat-pill {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 6px 12px;
+    font-size: 12px;
+    color: var(--text-mid);
+    display: flex; align-items: center; gap: 5px;
+  }
+  .stat-pill span { color: var(--text); font-weight: 600; }
+
+  /* ── Section ── */
+  .section { padding: 16px 16px 0; }
+  .section-title {
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--text-dim);
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+
+  /* ── Grid buttons ── */
+  .btn-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 10px; }
+  .btn-grid.single { grid-template-columns: 1fr; }
+  .btn-grid.triple { grid-template-columns: 1fr 1fr 1fr; }
+
+  .grid-btn {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 14px 12px;
+    cursor: pointer;
+    transition: all 0.15s;
+    text-align: left;
+    display: flex; flex-direction: column; gap: 6px;
+    position: relative; overflow: hidden;
+  }
+  .grid-btn:active { transform: scale(0.96); opacity: 0.85; }
+  .grid-btn .btn-icon { font-size: 22px; }
+  .grid-btn .btn-label { font-size: 13px; font-weight: 600; color: var(--text); }
+  .grid-btn .btn-sub { font-size: 10px; color: var(--text-dim); }
+  .grid-btn::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0; height: 2px;
+    border-radius: 14px 14px 0 0;
+  }
+
+  .btn-green { border-color: #00d97e44; }
+  .btn-green::before { background: var(--green); }
+  .btn-green .btn-icon-bg { color: var(--green); }
+
+  .btn-gold { border-color: #f5c84244; }
+  .btn-gold::before { background: var(--gold); }
+
+  .btn-blue { border-color: #3d8bff44; }
+  .btn-blue::before { background: var(--blue); }
+
+  .btn-purple { border-color: #a855f744; }
+  .btn-purple::before { background: var(--purple); }
+
+  .btn-red { border-color: #ff475744; }
+  .btn-red::before { background: var(--red); }
+
+  /* ── Main CTA ── */
+  .main-cta {
+    margin: 16px;
+    background: linear-gradient(135deg, #00d97e, #00b5ff);
+    border: none;
+    border-radius: 16px;
+    padding: 18px;
+    cursor: pointer;
+    display: flex; align-items: center; gap: 14px;
+    transition: all 0.15s;
+    width: calc(100% - 32px);
+  }
+  .main-cta:active { transform: scale(0.98); opacity: 0.9; }
+  .main-cta-icon { font-size: 32px; }
+  .main-cta-text h3 { font-size: 16px; font-weight: 800; color: #000; }
+  .main-cta-text p { font-size: 12px; color: rgba(0,0,0,0.6); margin-top: 2px; }
+  .main-cta-arrow { margin-left: auto; font-size: 20px; color: rgba(0,0,0,0.5); }
+
+  /* ── Market card ── */
+  .market-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  .market-item {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 12px;
+  }
+  .market-item .m-name { font-size: 11px; color: var(--text-dim); }
+  .market-item .m-price { font-size: 16px; font-weight: 700; color: var(--text); margin: 4px 0; }
+  .market-item .m-change { font-size: 11px; font-weight: 600; }
+  .m-up { color: var(--green); }
+  .m-down { color: var(--red); }
+
+  /* ── Bottom nav ── */
+  .bottom-nav {
+    position: fixed; bottom: 0; left: 0; right: 0;
+    background: var(--surface);
+    border-top: 1px solid var(--border);
+    display: flex;
+    padding: 8px 0 max(8px, env(safe-area-inset-bottom));
+    z-index: 100;
+  }
+  .nav-item {
+    flex: 1;
+    display: flex; flex-direction: column; align-items: center; gap: 3px;
+    cursor: pointer;
+    transition: all 0.15s;
+    padding: 4px 0;
+  }
+  .nav-item:active { transform: scale(0.9); }
+  .nav-icon { font-size: 20px; }
+  .nav-label { font-size: 9px; color: var(--text-dim); font-weight: 500; }
+  .nav-item.active .nav-label { color: var(--green); }
+  .nav-item.active .nav-icon { filter: drop-shadow(0 0 4px var(--green)); }
+
+  /* ── Premium page ── */
+  .premium-hero {
+    background: linear-gradient(160deg, #1a0f2e, #0f1825);
+    padding: 28px 16px 20px;
+    text-align: center;
+    border-bottom: 1px solid var(--border);
+  }
+  .premium-icon { font-size: 48px; margin-bottom: 8px; }
+  .premium-hero h2 { font-size: 24px; font-weight: 800; color: var(--gold); }
+  .premium-hero p { font-size: 13px; color: var(--text-dim); margin-top: 6px; }
+
+  .feature-list { padding: 16px; display: flex; flex-direction: column; gap: 10px; }
+  .feature-item {
+    display: flex; align-items: center; gap: 12px;
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 12px; padding: 12px;
+  }
+  .feature-item .f-icon { font-size: 20px; width: 36px; text-align: center; }
+  .feature-item .f-text { font-size: 13px; color: var(--text); font-weight: 500; }
+
+  .pay-section { padding: 0 16px 16px; }
+  .pay-title { font-size: 13px; font-weight: 700; color: var(--text-dim); margin-bottom: 10px; text-align: center; }
+  .pay-options { display: flex; flex-direction: column; gap: 10px; }
+  .pay-btn {
+    border: none; border-radius: 14px;
+    padding: 16px; cursor: pointer;
+    display: flex; align-items: center; gap: 12px;
+    transition: all 0.15s; width: 100%;
+  }
+  .pay-btn:active { transform: scale(0.98); }
+  .pay-btn .p-icon { font-size: 24px; }
+  .pay-btn .p-info { text-align: left; }
+  .pay-btn .p-name { font-size: 14px; font-weight: 700; }
+  .pay-btn .p-price { font-size: 12px; opacity: 0.75; margin-top: 1px; }
+  .pay-btn .p-arrow { margin-left: auto; opacity: 0.6; font-size: 16px; }
+  .pay-stars { background: linear-gradient(135deg, #1a1500, #2a2200); border: 1px solid #f5c84244; }
+  .pay-stars .p-name { color: var(--gold); }
+  .pay-ton { background: linear-gradient(135deg, #001a2a, #00121e); border: 1px solid #0098ea44; }
+  .pay-ton .p-name { color: #0098ea; }
+  .pay-card { background: linear-gradient(135deg, #001a10, #00120a); border: 1px solid #00d97e44; }
+  .pay-card .p-name { color: var(--green); }
+
+  /* ── Calculator ── */
+  .calc-form { padding: 16px; display: flex; flex-direction: column; gap: 12px; }
+  .input-group label { font-size: 11px; color: var(--text-dim); font-weight: 600; letter-spacing: 0.5px; display: block; margin-bottom: 6px; }
+  .input-group input {
+    width: 100%;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 12px 14px;
+    color: var(--text);
+    font-size: 15px;
+    outline: none;
+    transition: border-color 0.15s;
+  }
+  .input-group input:focus { border-color: var(--green); }
+  .input-group input::placeholder { color: var(--text-dim); }
+
+  .calc-btn {
+    background: linear-gradient(135deg, var(--green), #00b5ff);
+    border: none; border-radius: 12px;
+    padding: 15px; cursor: pointer;
+    font-size: 15px; font-weight: 700; color: #000;
+    transition: all 0.15s;
+  }
+  .calc-btn:active { transform: scale(0.98); opacity: 0.9; }
+
+  .calc-result {
+    background: var(--card);
+    border: 1px solid var(--green);
+    border-radius: 14px;
+    padding: 16px;
+    display: none;
+  }
+  .calc-result.show { display: block; }
+  .result-row {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 8px 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .result-row:last-child { border-bottom: none; }
+  .result-row .r-label { font-size: 12px; color: var(--text-dim); }
+  .result-row .r-val { font-size: 14px; font-weight: 700; color: var(--text); }
+  .r-green { color: var(--green) !important; }
+  .r-red { color: var(--red) !important; }
+  .r-gold { color: var(--gold) !important; }
+
+  /* ── History ── */
+  .history-list { padding: 16px; display: flex; flex-direction: column; gap: 10px; }
+  .history-item {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 14px;
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+  .history-item:active { transform: scale(0.98); }
+  .h-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
+  .h-asset { font-size: 14px; font-weight: 700; color: var(--text); }
+  .h-date { font-size: 10px; color: var(--text-dim); }
+  .h-signal {
+    display: inline-block;
+    padding: 3px 10px; border-radius: 20px;
+    font-size: 11px; font-weight: 700;
+    margin-bottom: 6px;
+  }
+  .sig-buy { background: var(--green-dim); color: var(--green); border: 1px solid var(--green); }
+  .sig-sell { background: var(--red-dim); color: var(--red); border: 1px solid var(--red); }
+  .sig-wait { background: var(--gold-dim); color: var(--gold); border: 1px solid var(--gold); }
+  .h-preview { font-size: 12px; color: var(--text-dim); line-height: 1.5; }
+
+  /* ── Referral ── */
+  .referral-card {
+    margin: 16px;
+    background: linear-gradient(135deg, #0a1f10, #0d1f2a);
+    border: 1px solid var(--green);
+    border-radius: 16px;
+    padding: 20px;
+    text-align: center;
+  }
+  .ref-icon { font-size: 40px; margin-bottom: 8px; }
+  .ref-title { font-size: 18px; font-weight: 800; color: var(--green); }
+  .ref-sub { font-size: 12px; color: var(--text-dim); margin-top: 6px; line-height: 1.5; }
+  .ref-code {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 12px;
+    margin: 14px 0;
+    font-size: 16px; font-weight: 700;
+    color: var(--text);
+    letter-spacing: 2px;
+    font-family: monospace;
+  }
+  .ref-share {
+    background: var(--green);
+    border: none; border-radius: 12px;
+    padding: 13px 24px;
+    font-size: 14px; font-weight: 700; color: #000;
+    cursor: pointer; width: 100%;
+    transition: all 0.15s;
+  }
+  .ref-share:active { transform: scale(0.98); opacity: 0.9; }
+  .ref-stats { display: flex; gap: 10px; margin-top: 14px; }
+  .ref-stat {
+    flex: 1;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 12px;
+    text-align: center;
+  }
+  .ref-stat .rs-num { font-size: 22px; font-weight: 800; color: var(--green); }
+  .ref-stat .rs-label { font-size: 10px; color: var(--text-dim); margin-top: 2px; }
+
+  /* ── Loader ── */
+  .loader {
+    display: flex; align-items: center; justify-content: center;
+    padding: 40px; gap: 8px;
+  }
+  .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--green); animation: pulse 1.2s infinite; }
+  .dot:nth-child(2) { animation-delay: 0.2s; }
+  .dot:nth-child(3) { animation-delay: 0.4s; }
+  @keyframes pulse { 0%, 80%, 100% { transform: scale(0.6); opacity: 0.4; } 40% { transform: scale(1); opacity: 1; } }
+</style>
+</head>
+<body>
+
+<!-- Header -->
+<div class="header">
+  <div class="header-logo">📊</div>
+  <div class="header-info">
+    <h1>Forex Analiz Bot</h1>
+    <p>AI Trading Assistant</p>
+  </div>
+  <div class="header-badge" id="premiumBadge">FREE</div>
+</div>
+
+<!-- ═══ HOME PAGE ═══ -->
+<div class="page active" id="page-home">
+  <div class="hero">
+    <div class="hero-greeting">Xush kelibsiz 👋</div>
+    <div class="hero-name" id="heroName">Trader</div>
+    <div class="hero-status">
+      <div class="stat-pill">📊 Tahlillar: <span id="analysisCount">0</span></div>
+      <div class="stat-pill">🎁 Bepul: <span id="freeLeft">7</span></div>
+    </div>
+  </div>
+
+  <!-- Main CTA -->
+  <button class="main-cta" onclick="sendAnalysis()">
+    <div class="main-cta-icon">📸</div>
+    <div class="main-cta-text">
+      <h3>Grafik Tahlil</h3>
+      <p>Skrinshot yuboring — AI tahlil qiladi</p>
+    </div>
+    <div class="main-cta-arrow">›</div>
+  </button>
+
+  <!-- Markets -->
+  <div class="section">
+    <div class="section-title">Bozor Narxlari</div>
+    <div class="market-grid" id="marketGrid">
+      <div class="market-item"><div class="m-name">BTC/USD</div><div class="m-price" id="btcPrice">—</div><div class="m-change m-up" id="btcChange">Yuklanmoqda</div></div>
+      <div class="market-item"><div class="m-name">ETH/USD</div><div class="m-price" id="ethPrice">—</div><div class="m-change m-up" id="ethChange">Yuklanmoqda</div></div>
+      <div class="market-item"><div class="m-name">GOLD</div><div class="m-price" id="goldPrice">—</div><div class="m-change" id="goldChange">Yuklanmoqda</div></div>
+      <div class="market-item"><div class="m-name">EUR/USD</div><div class="m-price" id="eurPrice">—</div><div class="m-change" id="eurChange">Yuklanmoqda</div></div>
+    </div>
+  </div>
+
+  <div style="height:10px"></div>
+
+  <!-- Feature buttons -->
+  <div class="section">
+    <div class="section-title">Asosiy Xizmatlar</div>
+    <div class="btn-grid">
+      <button class="grid-btn btn-purple" onclick="goPage('calc')">
+        <div class="btn-icon">🧮</div>
+        <div class="btn-label">Kalkulyator</div>
+        <div class="btn-sub">Risk hisoblash</div>
+      </button>
+      <button class="grid-btn btn-blue" onclick="goPage('history')">
+        <div class="btn-icon">📜</div>
+        <div class="btn-label">Tarix</div>
+        <div class="btn-sub">Tahlillarim</div>
+      </button>
+      <button class="grid-btn btn-green" onclick="goPage('referral')">
+        <div class="btn-icon">👥</div>
+        <div class="btn-label">Referral</div>
+        <div class="btn-sub">Do'st taklif qil</div>
+      </button>
+      <button class="grid-btn btn-gold" onclick="goPage('premium')">
+        <div class="btn-icon">💎</div>
+        <div class="btn-label">Premium</div>
+        <div class="btn-sub">Cheksiz tahlil</div>
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ PREMIUM PAGE ═══ -->
+<div class="page" id="page-premium">
+  <div class="premium-hero">
+    <div class="premium-icon">💎</div>
+    <h2>Premium Obuna</h2>
+    <p>Cheksiz tahlil va kengaytirilgan imkoniyatlar</p>
+  </div>
+  <div class="feature-list">
+    <div class="feature-item"><div class="f-icon">♾️</div><div class="f-text">Cheksiz grafik tahlil</div></div>
+    <div class="feature-item"><div class="f-icon">⚡</div><div class="f-text">Tez javob — 5 soniya</div></div>
+    <div class="feature-item"><div class="f-icon">📊</div><div class="f-text">Batafsil tahlil + SL/TP</div></div>
+    <div class="feature-item"><div class="f-icon">🌐</div><div class="f-text">O'zbek, Rus, Ingliz</div></div>
+    <div class="feature-item"><div class="f-icon">📢</div><div class="f-text">Kanal signallari</div></div>
+  </div>
+  <div class="pay-section">
+    <div class="pay-title">TO'LOV USULINI TANLANG</div>
+    <div class="pay-options">
+      <button class="pay-btn pay-stars" onclick="payStars()">
+        <div class="p-icon">⭐</div>
+        <div class="p-info"><div class="p-name">Telegram Stars</div><div class="p-price">299 Stars / oy</div></div>
+        <div class="p-arrow">›</div>
+      </button>
+      <button class="pay-btn pay-ton" onclick="payTon()">
+        <div class="p-icon">💎</div>
+        <div class="p-info"><div class="p-name">TON</div><div class="p-price" id="tonPrice">5 TON / oy</div></div>
+        <div class="p-arrow">›</div>
+      </button>
+      <button class="pay-btn pay-card" onclick="payCard()">
+        <div class="p-icon">💳</div>
+        <div class="p-info"><div class="p-name">Visa / Uzcard</div><div class="p-price" id="cardPrice">50,000 so'm / oy</div></div>
+        <div class="p-arrow">›</div>
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ CALCULATOR PAGE ═══ -->
+<div class="page" id="page-calc">
+  <div class="section" style="padding-top:16px">
+    <div class="section-title">Risk Kalkulyator</div>
+  </div>
+  <div class="calc-form">
+    <div class="input-group">
+      <label>HISOB HAJMI ($)</label>
+      <input type="number" id="balance" placeholder="Masalan: 1000" inputmode="decimal">
+    </div>
+    <div class="input-group">
+      <label>RISK % (1-5%)</label>
+      <input type="number" id="riskPct" placeholder="Masalan: 2" inputmode="decimal">
+    </div>
+    <div class="input-group">
+      <label>KIRISH NARXI</label>
+      <input type="number" id="entry" placeholder="Masalan: 2650.00" inputmode="decimal">
+    </div>
+    <div class="input-group">
+      <label>STOP LOSS NARXI</label>
+      <input type="number" id="sl" placeholder="Masalan: 2640.00" inputmode="decimal">
+    </div>
+    <button class="calc-btn" onclick="calculate()">⚡ Hisoblash</button>
+
+    <div class="calc-result" id="calcResult">
+      <div class="result-row"><div class="r-label">📍 Yo'nalish</div><div class="r-val" id="rDir">—</div></div>
+      <div class="result-row"><div class="r-label">💰 Risk summasi</div><div class="r-val r-red" id="rRisk">—</div></div>
+      <div class="result-row"><div class="r-label">📏 SL masofa</div><div class="r-val" id="rSLDist">—</div></div>
+      <div class="result-row"><div class="r-label">🎯 TP 1:1</div><div class="r-val r-green" id="rTP1">—</div></div>
+      <div class="result-row"><div class="r-label">🎯 TP 1:2</div><div class="r-val r-green" id="rTP2">—</div></div>
+      <div class="result-row"><div class="r-label">🎯 TP 1:3</div><div class="r-val r-gold" id="rTP3">—</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ HISTORY PAGE ═══ -->
+<div class="page" id="page-history">
+  <div class="section" style="padding-top:16px">
+    <div class="section-title">Tahlil Tarixi</div>
+  </div>
+  <div class="history-list" id="historyList">
+    <div class="loader"><div class="dot"></div><div class="dot"></div><div class="dot"></div></div>
+  </div>
+</div>
+
+<!-- ═══ REFERRAL PAGE ═══ -->
+<div class="page" id="page-referral">
+  <div class="referral-card">
+    <div class="ref-icon">👥</div>
+    <div class="ref-title">Do'st Taklif Qil</div>
+    <div class="ref-sub">Har bir do'stingiz uchun <strong style="color:var(--green)">1 ta bepul tahlil</strong> oling!</div>
+    <div class="ref-code" id="refCode">LOADING...</div>
+    <button class="ref-share" onclick="shareRef()">📤 Do'stlarga Ulashish</button>
+    <div class="ref-stats">
+      <div class="ref-stat"><div class="rs-num" id="refCount">0</div><div class="rs-label">Taklif qilingan</div></div>
+      <div class="ref-stat"><div class="rs-num" id="refBonus">0</div><div class="rs-label">Bonus tahlillar</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- Bottom Nav -->
+<div class="bottom-nav">
+  <div class="nav-item active" onclick="goPage('home')" id="nav-home">
+    <div class="nav-icon">🏠</div>
+    <div class="nav-label">Bosh sahifa</div>
+  </div>
+  <div class="nav-item" onclick="goPage('premium')" id="nav-premium">
+    <div class="nav-icon">💎</div>
+    <div class="nav-label">Premium</div>
+  </div>
+  <div class="nav-item" onclick="goPage('calc')" id="nav-calc">
+    <div class="nav-icon">🧮</div>
+    <div class="nav-label">Kalkulyator</div>
+  </div>
+  <div class="nav-item" onclick="goPage('history')" id="nav-history">
+    <div class="nav-icon">📜</div>
+    <div class="nav-label">Tarix</div>
+  </div>
+  <div class="nav-item" onclick="goPage('referral')" id="nav-referral">
+    <div class="nav-icon">👥</div>
+    <div class="nav-label">Referral</div>
+  </div>
+</div>
+
+<script>
+const tg = window.Telegram?.WebApp;
+if (tg) { tg.ready(); tg.expand(); }
+
+const user = tg?.initDataUnsafe?.user;
+const userId = user?.id;
+
+// Init
+if (user) {
+  document.getElementById('heroName').textContent = user.first_name || 'Trader';
+}
+
+// Page navigation
+function goPage(name) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+  document.getElementById('page-' + name).classList.add('active');
+  const nav = document.getElementById('nav-' + name);
+  if (nav) nav.classList.add('active');
+  if (name === 'history') loadHistory();
+  if (name === 'referral') loadReferral();
+}
+
+// Send data to bot
+function sendAnalysis() {
+  if (tg) {
+    tg.sendData(JSON.stringify({ action: 'analyze' }));
+  }
+}
+
+function payStars() {
+  if (tg) tg.sendData(JSON.stringify({ action: 'pay_stars' }));
+}
+function payTon() {
+  if (tg) tg.sendData(JSON.stringify({ action: 'pay_ton' }));
+}
+function payCard() {
+  if (tg) tg.sendData(JSON.stringify({ action: 'pay_card' }));
+}
+
+// Calculator
+function calculate() {
+  const balance = parseFloat(document.getElementById('balance').value);
+  const riskPct = parseFloat(document.getElementById('riskPct').value);
+  const entry = parseFloat(document.getElementById('entry').value);
+  const sl = parseFloat(document.getElementById('sl').value);
+
+  if (!balance || !riskPct || !entry || !sl) {
+    alert('Barcha maydonlarni to\'ldiring!');
+    return;
+  }
+
+  const riskAmount = (balance * riskPct / 100).toFixed(2);
+  const slDist = Math.abs(entry - sl).toFixed(4);
+  const isLong = entry > sl;
+  const dir = isLong ? '🟢 LONG (Buy)' : '🔴 SHORT (Sell)';
+
+  const tp1 = isLong ? (entry + parseFloat(slDist)).toFixed(4) : (entry - parseFloat(slDist)).toFixed(4);
+  const tp2 = isLong ? (entry + parseFloat(slDist) * 2).toFixed(4) : (entry - parseFloat(slDist) * 2).toFixed(4);
+  const tp3 = isLong ? (entry + parseFloat(slDist) * 3).toFixed(4) : (entry - parseFloat(slDist) * 3).toFixed(4);
+
+  document.getElementById('rDir').textContent = dir;
+  document.getElementById('rRisk').textContent = '$' + riskAmount;
+  document.getElementById('rSLDist').textContent = slDist + ' pip';
+  document.getElementById('rTP1').textContent = tp1;
+  document.getElementById('rTP2').textContent = tp2;
+  document.getElementById('rTP3').textContent = tp3;
+  document.getElementById('calcResult').classList.add('show');
+}
+
+// Market prices
+async function loadMarket() {
+  try {
+    const res = await fetch('https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum&vs_currencies=usd&include_24hr_change=true');
+    const data = await res.json();
+    const btc = data.bitcoin;
+    const eth = data.ethereum;
+
+    document.getElementById('btcPrice').textContent = '$' + btc.usd.toLocaleString();
+    document.getElementById('btcChange').textContent = (btc.usd_24h_change > 0 ? '+' : '') + btc.usd_24h_change.toFixed(2) + '%';
+    document.getElementById('btcChange').className = 'm-change ' + (btc.usd_24h_change > 0 ? 'm-up' : 'm-down');
+
+    document.getElementById('ethPrice').textContent = '$' + eth.usd.toLocaleString();
+    document.getElementById('ethChange').textContent = (eth.usd_24h_change > 0 ? '+' : '') + eth.usd_24h_change.toFixed(2) + '%';
+    document.getElementById('ethChange').className = 'm-change ' + (eth.usd_24h_change > 0 ? 'm-up' : 'm-down');
+  } catch(e) {
+    document.getElementById('btcPrice').textContent = 'N/A';
+    document.getElementById('ethPrice').textContent = 'N/A';
+  }
+
+  try {
+    const fx = await fetch('https://api.frankfurter.app/latest?from=EUR&to=USD');
+    const fxd = await fx.json();
+    document.getElementById('eurPrice').textContent = fxd.rates.USD.toFixed(4);
+    document.getElementById('eurChange').textContent = 'Live';
+    document.getElementById('eurChange').className = 'm-change m-up';
+  } catch(e) {
+    document.getElementById('eurPrice').textContent = 'N/A';
+  }
+
+  document.getElementById('goldPrice').textContent = '~$3,300';
+  document.getElementById('goldChange').textContent = 'XAU/USD';
+  document.getElementById('goldChange').className = 'm-change m-up';
+}
+
+// History (sample data — real data from bot)
+function loadHistory() {
+  const list = document.getElementById('historyList');
+  const sample = [
+    { asset: 'XAUSGD', signal: 'sell', date: '2026-06-10', preview: 'Bearish trend davom etmoqda. Support: 5,500' },
+    { asset: 'BTC/USD', signal: 'buy', date: '2026-06-09', preview: 'Bullish breakout. Resistance: 68,000' },
+    { asset: 'EUR/USD', signal: 'wait', date: '2026-06-08', preview: 'Sideways harakat. Kanal ichida qolmoqda' },
+  ];
+
+  list.innerHTML = sample.map(h => `
+    <div class="history-item">
+      <div class="h-header">
+        <div class="h-asset">${h.asset}</div>
+        <div class="h-date">${h.date}</div>
+      </div>
+      <div class="h-signal sig-${h.signal}">${h.signal.toUpperCase()}</div>
+      <div class="h-preview">${h.preview}</div>
+    </div>
+  `).join('');
+}
+
+// Referral
+function loadReferral() {
+  const code = 'REF' + (userId || '12345');
+  document.getElementById('refCode').textContent = code;
+}
+
+function shareRef() {
+  const code = document.getElementById('refCode').textContent;
+  const text = `📊 Forex Analiz Bot — AI bilan grafik tahlil qiling!\n\n🎁 Mening referral kodum: ${code}\n\nBotga o'ting: https://t.me/ForexAnalizBot?start=${code}`;
+  if (tg) {
+    tg.openTelegramLink('https://t.me/share/url?url=https://t.me/ForexAnalizBot?start=' + code + '&text=' + encodeURIComponent(text));
+  }
+}
+
+// Set premium badge
+function checkPremium() {
+  // This would be loaded from bot data
+  const badge = document.getElementById('premiumBadge');
+  // If premium, show differently
+  // badge.textContent = '💎 PREMIUM';
+  // badge.style.background = 'var(--gold-dim)';
+  // badge.style.color = 'var(--gold)';
+  // badge.style.borderColor = 'var(--gold)';
+}
+
+// Load on start
+loadMarket();
+checkPremium();
+setInterval(loadMarket, 60000); // refresh every minute
+</script>
+</body>
+</html>
