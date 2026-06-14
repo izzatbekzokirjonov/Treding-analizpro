@@ -1,3 +1,4 @@
+from keep_alive import keep_alive
 import asyncio
 import logging
 from aiogram import Bot, Dispatcher
@@ -18,6 +19,7 @@ logger = logging.getLogger(__name__)
 
 
 async def main():
+    keep_alive()
     await init_db()
 
     bot = Bot(
