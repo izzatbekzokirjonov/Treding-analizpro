@@ -1,3 +1,4 @@
+from aiogram.types import WebAppInfo
 from aiogram import Router, F
 from aiogram.types import Message, CallbackQuery
 from aiogram.filters import CommandStart, Command
@@ -18,6 +19,7 @@ def main_keyboard(lang):
     builder.button(text="📜 Tarix", callback_data="history")
     builder.button(text="ℹ️ Yordam", callback_data="help")
     builder.button(text="🌐 Til", callback_data="language")
+    builder.button(text="🌐 Web App", web_app=WebAppInfo(url="https://treding-analizpro-production.up.railway.app/webapp"))
     builder.adjust(2)
     return builder.as_markup()
 
