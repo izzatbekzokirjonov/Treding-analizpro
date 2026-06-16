@@ -16,360 +16,194 @@
     --gold: #f5c842;
     --gold-dim: #f5c84222;
     --red: #ff4757;
-    --red-dim: #ff475722;
     --blue: #3d8bff;
-    --blue-dim: #3d8bff22;
-    --purple: #a855f7;
-    --purple-dim: #a855f722;
     --text: #e8edf5;
     --text-dim: #5a6a80;
     --text-mid: #8899aa;
   }
-  * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
-  body {
-    background: var(--bg);
-    color: var(--text);
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-    min-height: 100vh;
-    overflow-x: hidden;
-  }
+  * { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
+  body { background:var(--bg); color:var(--text); font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif; min-height:100vh; }
 
-  /* ── Header ── */
   .header {
-    padding: 20px 16px 12px;
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    border-bottom: 1px solid var(--border);
-    background: var(--surface);
-    position: sticky; top: 0; z-index: 10;
+    padding:12px 16px;
+    display:flex; align-items:center; gap:10px;
+    background:var(--surface);
+    border-bottom:1px solid var(--border);
+    position:sticky; top:0; z-index:10;
   }
-  .header-logo {
-    width: 40px; height: 40px;
-    background: linear-gradient(135deg, #00d97e, #00b5ff);
-    border-radius: 12px;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 20px;
-  }
-  .header-info h1 { font-size: 16px; font-weight: 700; color: var(--text); }
-  .header-info p { font-size: 11px; color: var(--text-dim); margin-top: 1px; }
+  .header img { width:36px; height:36px; border-radius:50%; }
+  .header-info h1 { font-size:15px; font-weight:700; }
+  .header-info p { font-size:10px; color:var(--text-dim); }
   .header-badge {
-    margin-left: auto;
-    background: var(--green-dim);
-    color: var(--green);
-    border: 1px solid var(--green);
-    padding: 4px 10px;
-    border-radius: 20px;
-    font-size: 11px;
-    font-weight: 600;
+    margin-left:auto;
+    background:var(--green-dim);
+    color:var(--green);
+    border:1px solid var(--green);
+    padding:3px 10px; border-radius:20px;
+    font-size:11px; font-weight:600;
   }
 
-  /* ── Pages ── */
-  .page { display: none; padding: 0 0 80px; }
-  .page.active { display: block; }
+  .page { display:none; padding:0 0 80px; }
+  .page.active { display:block; }
 
-  /* ── Hero ── */
   .hero {
-    background: linear-gradient(160deg, #0a1628 0%, #0d1f35 100%);
-    padding: 24px 16px 20px;
-    border-bottom: 1px solid var(--border);
+    background:linear-gradient(160deg,#0a1628,#0d1f35);
+    padding:20px 16px 16px;
+    border-bottom:1px solid var(--border);
+    text-align:center;
   }
-  .hero-greeting { font-size: 13px; color: var(--text-dim); margin-bottom: 4px; }
-  .hero-name { font-size: 22px; font-weight: 800; color: var(--text); }
-  .hero-status {
-    display: flex; gap: 8px; margin-top: 14px; flex-wrap: wrap;
-  }
+  .hero img { width:70px; height:70px; border-radius:50%; margin-bottom:8px; border:2px solid var(--green); }
+  .hero h2 { font-size:18px; font-weight:800; }
+  .hero p { font-size:12px; color:var(--text-dim); margin-top:4px; }
+  .hero-stats { display:flex; gap:8px; margin-top:12px; justify-content:center; }
   .stat-pill {
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: 20px;
-    padding: 6px 12px;
-    font-size: 12px;
-    color: var(--text-mid);
-    display: flex; align-items: center; gap: 5px;
+    background:var(--card); border:1px solid var(--border);
+    border-radius:20px; padding:5px 12px;
+    font-size:11px; color:var(--text-mid);
   }
-  .stat-pill span { color: var(--text); font-weight: 600; }
+  .stat-pill span { color:var(--text); font-weight:600; }
 
-  /* ── Section ── */
-  .section { padding: 16px 16px 0; }
-  .section-title {
-    font-size: 11px;
-    font-weight: 700;
-    color: var(--text-dim);
-    letter-spacing: 1.2px;
-    text-transform: uppercase;
-    margin-bottom: 10px;
-  }
+  .section { padding:14px 16px 0; }
+  .section-title { font-size:10px; font-weight:700; color:var(--text-dim); letter-spacing:1.2px; text-transform:uppercase; margin-bottom:8px; }
 
-  /* ── Grid buttons ── */
-  .btn-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 10px; }
-  .btn-grid.single { grid-template-columns: 1fr; }
-  .btn-grid.triple { grid-template-columns: 1fr 1fr 1fr; }
-
-  .grid-btn {
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: 14px;
-    padding: 14px 12px;
-    cursor: pointer;
-    transition: all 0.15s;
-    text-align: left;
-    display: flex; flex-direction: column; gap: 6px;
-    position: relative; overflow: hidden;
-  }
-  .grid-btn:active { transform: scale(0.96); opacity: 0.85; }
-  .grid-btn .btn-icon { font-size: 22px; }
-  .grid-btn .btn-label { font-size: 13px; font-weight: 600; color: var(--text); }
-  .grid-btn .btn-sub { font-size: 10px; color: var(--text-dim); }
-  .grid-btn::before {
-    content: '';
-    position: absolute; top: 0; left: 0; right: 0; height: 2px;
-    border-radius: 14px 14px 0 0;
-  }
-
-  .btn-green { border-color: #00d97e44; }
-  .btn-green::before { background: var(--green); }
-  .btn-green .btn-icon-bg { color: var(--green); }
-
-  .btn-gold { border-color: #f5c84244; }
-  .btn-gold::before { background: var(--gold); }
-
-  .btn-blue { border-color: #3d8bff44; }
-  .btn-blue::before { background: var(--blue); }
-
-  .btn-purple { border-color: #a855f744; }
-  .btn-purple::before { background: var(--purple); }
-
-  .btn-red { border-color: #ff475744; }
-  .btn-red::before { background: var(--red); }
-
-  /* ── Main CTA ── */
   .main-cta {
-    margin: 16px;
-    background: linear-gradient(135deg, #00d97e, #00b5ff);
-    border: none;
-    border-radius: 16px;
-    padding: 18px;
-    cursor: pointer;
-    display: flex; align-items: center; gap: 14px;
-    transition: all 0.15s;
-    width: calc(100% - 32px);
+    margin:14px 16px 0;
+    background:linear-gradient(135deg,#00d97e,#00b5ff);
+    border:none; border-radius:14px; padding:16px;
+    cursor:pointer; display:flex; align-items:center; gap:12px;
+    width:calc(100% - 32px); transition:all 0.15s;
   }
-  .main-cta:active { transform: scale(0.98); opacity: 0.9; }
-  .main-cta-icon { font-size: 32px; }
-  .main-cta-text h3 { font-size: 16px; font-weight: 800; color: #000; }
-  .main-cta-text p { font-size: 12px; color: rgba(0,0,0,0.6); margin-top: 2px; }
-  .main-cta-arrow { margin-left: auto; font-size: 20px; color: rgba(0,0,0,0.5); }
+  .main-cta:active { transform:scale(0.98); }
+  .main-cta-icon { font-size:28px; }
+  .main-cta-text h3 { font-size:15px; font-weight:800; color:#000; }
+  .main-cta-text p { font-size:11px; color:rgba(0,0,0,0.6); margin-top:1px; }
+  .main-cta-arrow { margin-left:auto; font-size:18px; color:rgba(0,0,0,0.4); }
 
-  /* ── Market card ── */
-  .market-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
-  .market-item {
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    padding: 12px;
+  .btn-grid { display:grid; grid-template-columns:1fr 1fr; gap:8px; }
+  .grid-btn {
+    background:var(--card); border:1px solid var(--border);
+    border-radius:12px; padding:12px; cursor:pointer;
+    transition:all 0.15s; text-align:left;
+    display:flex; flex-direction:column; gap:4px;
+    position:relative; overflow:hidden;
   }
-  .market-item .m-name { font-size: 11px; color: var(--text-dim); }
-  .market-item .m-price { font-size: 16px; font-weight: 700; color: var(--text); margin: 4px 0; }
-  .market-item .m-change { font-size: 11px; font-weight: 600; }
-  .m-up { color: var(--green); }
-  .m-down { color: var(--red); }
+  .grid-btn:active { transform:scale(0.96); }
+  .grid-btn::before { content:''; position:absolute; top:0; left:0; right:0; height:2px; border-radius:12px 12px 0 0; }
+  .grid-btn .btn-icon { font-size:20px; }
+  .grid-btn .btn-label { font-size:12px; font-weight:600; color:var(--text); }
+  .grid-btn .btn-sub { font-size:10px; color:var(--text-dim); }
+  .btn-green::before { background:var(--green); } .btn-green { border-color:#00d97e44; }
+  .btn-gold::before { background:var(--gold); } .btn-gold { border-color:#f5c84244; }
+  .btn-blue::before { background:var(--blue); } .btn-blue { border-color:#3d8bff44; }
+  .btn-red::before { background:var(--red); } .btn-red { border-color:#ff475744; }
 
-  /* ── Bottom nav ── */
-  .bottom-nav {
-    position: fixed; bottom: 0; left: 0; right: 0;
-    background: var(--surface);
-    border-top: 1px solid var(--border);
-    display: flex;
-    padding: 8px 0 max(8px, env(safe-area-inset-bottom));
-    z-index: 100;
+  /* Analysis upload area */
+  .upload-area {
+    margin:14px 16px 0;
+    background:var(--card); border:2px dashed var(--green);
+    border-radius:14px; padding:24px; text-align:center;
+    cursor:pointer; transition:all 0.15s;
   }
-  .nav-item {
-    flex: 1;
-    display: flex; flex-direction: column; align-items: center; gap: 3px;
-    cursor: pointer;
-    transition: all 0.15s;
-    padding: 4px 0;
-  }
-  .nav-item:active { transform: scale(0.9); }
-  .nav-icon { font-size: 20px; }
-  .nav-label { font-size: 9px; color: var(--text-dim); font-weight: 500; }
-  .nav-item.active .nav-label { color: var(--green); }
-  .nav-item.active .nav-icon { filter: drop-shadow(0 0 4px var(--green)); }
+  .upload-area:active { transform:scale(0.98); background:#0a1f15; }
+  .upload-icon { font-size:40px; margin-bottom:8px; }
+  .upload-title { font-size:15px; font-weight:700; color:var(--green); }
+  .upload-sub { font-size:11px; color:var(--text-dim); margin-top:4px; }
+  #fileInput { display:none; }
 
-  /* ── Premium page ── */
-  .premium-hero {
-    background: linear-gradient(160deg, #1a0f2e, #0f1825);
-    padding: 28px 16px 20px;
-    text-align: center;
-    border-bottom: 1px solid var(--border);
+  .analysis-result {
+    margin:12px 16px 0;
+    background:var(--card); border:1px solid var(--green);
+    border-radius:14px; padding:14px;
+    display:none;
   }
-  .premium-icon { font-size: 48px; margin-bottom: 8px; }
-  .premium-hero h2 { font-size: 24px; font-weight: 800; color: var(--gold); }
-  .premium-hero p { font-size: 13px; color: var(--text-dim); margin-top: 6px; }
+  .analysis-result.show { display:block; }
+  .result-header { display:flex; align-items:center; gap:8px; margin-bottom:10px; }
+  .result-header img { width:24px; height:24px; border-radius:50%; }
+  .result-header span { font-size:12px; font-weight:700; color:var(--green); }
+  .result-text { font-size:12px; line-height:1.6; color:var(--text); white-space:pre-wrap; }
+  .analyzing { text-align:center; padding:20px; }
+  .analyzing p { color:var(--green); font-size:13px; }
 
-  .feature-list { padding: 16px; display: flex; flex-direction: column; gap: 10px; }
-  .feature-item {
-    display: flex; align-items: center; gap: 12px;
-    background: var(--card); border: 1px solid var(--border);
-    border-radius: 12px; padding: 12px;
-  }
-  .feature-item .f-icon { font-size: 20px; width: 36px; text-align: center; }
-  .feature-item .f-text { font-size: 13px; color: var(--text); font-weight: 500; }
+  /* Market */
+  .market-grid { display:grid; grid-template-columns:1fr 1fr; gap:8px; }
+  .market-item { background:var(--card); border:1px solid var(--border); border-radius:10px; padding:10px; }
+  .market-item .m-name { font-size:10px; color:var(--text-dim); }
+  .market-item .m-price { font-size:15px; font-weight:700; margin:3px 0; }
+  .m-up { color:var(--green); } .m-down { color:var(--red); }
 
-  .pay-section { padding: 0 16px 16px; }
-  .pay-title { font-size: 13px; font-weight: 700; color: var(--text-dim); margin-bottom: 10px; text-align: center; }
-  .pay-options { display: flex; flex-direction: column; gap: 10px; }
-  .pay-btn {
-    border: none; border-radius: 14px;
-    padding: 16px; cursor: pointer;
-    display: flex; align-items: center; gap: 12px;
-    transition: all 0.15s; width: 100%;
-  }
-  .pay-btn:active { transform: scale(0.98); }
-  .pay-btn .p-icon { font-size: 24px; }
-  .pay-btn .p-info { text-align: left; }
-  .pay-btn .p-name { font-size: 14px; font-weight: 700; }
-  .pay-btn .p-price { font-size: 12px; opacity: 0.75; margin-top: 1px; }
-  .pay-btn .p-arrow { margin-left: auto; opacity: 0.6; font-size: 16px; }
-  .pay-stars { background: linear-gradient(135deg, #1a1500, #2a2200); border: 1px solid #f5c84244; }
-  .pay-stars .p-name { color: var(--gold); }
-  .pay-ton { background: linear-gradient(135deg, #001a2a, #00121e); border: 1px solid #0098ea44; }
-  .pay-ton .p-name { color: #0098ea; }
-  .pay-card { background: linear-gradient(135deg, #001a10, #00120a); border: 1px solid #00d97e44; }
-  .pay-card .p-name { color: var(--green); }
-
-  /* ── Calculator ── */
-  .calc-form { padding: 16px; display: flex; flex-direction: column; gap: 12px; }
-  .input-group label { font-size: 11px; color: var(--text-dim); font-weight: 600; letter-spacing: 0.5px; display: block; margin-bottom: 6px; }
+  /* Calculator */
+  .calc-form { padding:14px 16px 0; display:flex; flex-direction:column; gap:10px; }
+  .input-group label { font-size:10px; color:var(--text-dim); font-weight:600; display:block; margin-bottom:4px; }
   .input-group input {
-    width: 100%;
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: 10px;
-    padding: 12px 14px;
-    color: var(--text);
-    font-size: 15px;
-    outline: none;
-    transition: border-color 0.15s;
+    width:100%; background:var(--card); border:1px solid var(--border);
+    border-radius:10px; padding:10px 12px; color:var(--text); font-size:14px; outline:none;
   }
-  .input-group input:focus { border-color: var(--green); }
-  .input-group input::placeholder { color: var(--text-dim); }
+  .input-group input:focus { border-color:var(--green); }
+  .calc-btn { background:linear-gradient(135deg,var(--green),#00b5ff); border:none; border-radius:10px; padding:13px; cursor:pointer; font-size:14px; font-weight:700; color:#000; }
+  .calc-result { background:var(--card); border:1px solid var(--green); border-radius:12px; padding:14px; display:none; }
+  .calc-result.show { display:block; }
+  .result-row { display:flex; justify-content:space-between; padding:6px 0; border-bottom:1px solid var(--border); }
+  .result-row:last-child { border:none; }
+  .result-row .r-label { font-size:11px; color:var(--text-dim); }
+  .result-row .r-val { font-size:13px; font-weight:700; }
+  .r-green { color:var(--green); } .r-red { color:var(--red); } .r-gold { color:var(--gold); }
 
-  .calc-btn {
-    background: linear-gradient(135deg, var(--green), #00b5ff);
-    border: none; border-radius: 12px;
-    padding: 15px; cursor: pointer;
-    font-size: 15px; font-weight: 700; color: #000;
-    transition: all 0.15s;
-  }
-  .calc-btn:active { transform: scale(0.98); opacity: 0.9; }
+  /* Premium */
+  .premium-hero { background:linear-gradient(160deg,#1a0f2e,#0f1825); padding:24px 16px; text-align:center; border-bottom:1px solid var(--border); }
+  .premium-hero .p-icon { font-size:44px; margin-bottom:6px; }
+  .premium-hero h2 { font-size:22px; font-weight:800; color:var(--gold); }
+  .premium-hero p { font-size:12px; color:var(--text-dim); margin-top:4px; }
+  .feature-list { padding:14px 16px 0; display:flex; flex-direction:column; gap:8px; }
+  .feature-item { display:flex; align-items:center; gap:10px; background:var(--card); border:1px solid var(--border); border-radius:10px; padding:10px; }
+  .feature-item .f-icon { font-size:18px; }
+  .feature-item .f-text { font-size:12px; font-weight:500; }
+  .pay-options { padding:14px 16px 0; display:flex; flex-direction:column; gap:8px; }
+  .pay-btn { border:none; border-radius:12px; padding:14px; cursor:pointer; display:flex; align-items:center; gap:10px; width:100%; transition:all 0.15s; }
+  .pay-btn:active { transform:scale(0.98); }
+  .pay-btn .p-icon { font-size:22px; }
+  .pay-btn .p-name { font-size:13px; font-weight:700; text-align:left; }
+  .pay-btn .p-price { font-size:11px; opacity:0.7; text-align:left; }
+  .pay-btn .p-arrow { margin-left:auto; }
+  .pay-stars { background:#1a1500; border:1px solid #f5c84244; }
+  .pay-stars .p-name { color:var(--gold); }
+  .pay-ton { background:#001a2a; border:1px solid #0098ea44; }
+  .pay-ton .p-name { color:#0098ea; }
+  .pay-card { background:#001a10; border:1px solid #00d97e44; }
+  .pay-card .p-name { color:var(--green); }
 
-  .calc-result {
-    background: var(--card);
-    border: 1px solid var(--green);
-    border-radius: 14px;
-    padding: 16px;
-    display: none;
-  }
-  .calc-result.show { display: block; }
-  .result-row {
-    display: flex; justify-content: space-between; align-items: center;
-    padding: 8px 0;
-    border-bottom: 1px solid var(--border);
-  }
-  .result-row:last-child { border-bottom: none; }
-  .result-row .r-label { font-size: 12px; color: var(--text-dim); }
-  .result-row .r-val { font-size: 14px; font-weight: 700; color: var(--text); }
-  .r-green { color: var(--green) !important; }
-  .r-red { color: var(--red) !important; }
-  .r-gold { color: var(--gold) !important; }
+  /* Referral */
+  .referral-card { margin:14px 16px 0; background:linear-gradient(135deg,#0a1f10,#0d1f2a); border:1px solid var(--green); border-radius:14px; padding:18px; text-align:center; }
+  .ref-icon { font-size:36px; margin-bottom:6px; }
+  .ref-title { font-size:16px; font-weight:800; color:var(--green); }
+  .ref-sub { font-size:11px; color:var(--text-dim); margin-top:4px; line-height:1.5; }
+  .ref-code { background:var(--bg); border:1px solid var(--border); border-radius:8px; padding:10px; margin:12px 0; font-size:15px; font-weight:700; letter-spacing:2px; font-family:monospace; }
+  .ref-share { background:var(--green); border:none; border-radius:10px; padding:12px; font-size:13px; font-weight:700; color:#000; cursor:pointer; width:100%; }
+  .ref-stats { display:flex; gap:8px; margin-top:12px; }
+  .ref-stat { flex:1; background:var(--card); border:1px solid var(--border); border-radius:10px; padding:10px; text-align:center; }
+  .ref-stat .rs-num { font-size:20px; font-weight:800; color:var(--green); }
+  .ref-stat .rs-label { font-size:9px; color:var(--text-dim); }
 
-  /* ── History ── */
-  .history-list { padding: 16px; display: flex; flex-direction: column; gap: 10px; }
-  .history-item {
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: 14px;
-    padding: 14px;
-    cursor: pointer;
-    transition: all 0.15s;
-  }
-  .history-item:active { transform: scale(0.98); }
-  .h-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
-  .h-asset { font-size: 14px; font-weight: 700; color: var(--text); }
-  .h-date { font-size: 10px; color: var(--text-dim); }
-  .h-signal {
-    display: inline-block;
-    padding: 3px 10px; border-radius: 20px;
-    font-size: 11px; font-weight: 700;
-    margin-bottom: 6px;
-  }
-  .sig-buy { background: var(--green-dim); color: var(--green); border: 1px solid var(--green); }
-  .sig-sell { background: var(--red-dim); color: var(--red); border: 1px solid var(--red); }
-  .sig-wait { background: var(--gold-dim); color: var(--gold); border: 1px solid var(--gold); }
-  .h-preview { font-size: 12px; color: var(--text-dim); line-height: 1.5; }
+  /* Bottom nav */
+  .bottom-nav { position:fixed; bottom:0; left:0; right:0; background:var(--surface); border-top:1px solid var(--border); display:flex; padding:6px 0 max(6px,env(safe-area-inset-bottom)); z-index:100; }
+  .nav-item { flex:1; display:flex; flex-direction:column; align-items:center; gap:2px; cursor:pointer; padding:4px 0; }
+  .nav-icon { font-size:18px; }
+  .nav-label { font-size:9px; color:var(--text-dim); }
+  .nav-item.active .nav-label { color:var(--green); }
 
-  /* ── Referral ── */
-  .referral-card {
-    margin: 16px;
-    background: linear-gradient(135deg, #0a1f10, #0d1f2a);
-    border: 1px solid var(--green);
-    border-radius: 16px;
-    padding: 20px;
-    text-align: center;
-  }
-  .ref-icon { font-size: 40px; margin-bottom: 8px; }
-  .ref-title { font-size: 18px; font-weight: 800; color: var(--green); }
-  .ref-sub { font-size: 12px; color: var(--text-dim); margin-top: 6px; line-height: 1.5; }
-  .ref-code {
-    background: var(--bg);
-    border: 1px solid var(--border);
-    border-radius: 10px;
-    padding: 12px;
-    margin: 14px 0;
-    font-size: 16px; font-weight: 700;
-    color: var(--text);
-    letter-spacing: 2px;
-    font-family: monospace;
-  }
-  .ref-share {
-    background: var(--green);
-    border: none; border-radius: 12px;
-    padding: 13px 24px;
-    font-size: 14px; font-weight: 700; color: #000;
-    cursor: pointer; width: 100%;
-    transition: all 0.15s;
-  }
-  .ref-share:active { transform: scale(0.98); opacity: 0.9; }
-  .ref-stats { display: flex; gap: 10px; margin-top: 14px; }
-  .ref-stat {
-    flex: 1;
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    padding: 12px;
-    text-align: center;
-  }
-  .ref-stat .rs-num { font-size: 22px; font-weight: 800; color: var(--green); }
-  .ref-stat .rs-label { font-size: 10px; color: var(--text-dim); margin-top: 2px; }
+  .dot { width:7px; height:7px; border-radius:50%; background:var(--green); animation:pulse 1.2s infinite; display:inline-block; margin:0 2px; }
+  .dot:nth-child(2) { animation-delay:0.2s; }
+  .dot:nth-child(3) { animation-delay:0.4s; }
+  @keyframes pulse { 0%,80%,100% { transform:scale(0.6); opacity:0.4; } 40% { transform:scale(1); opacity:1; } }
 
-  /* ── Loader ── */
-  .loader {
-    display: flex; align-items: center; justify-content: center;
-    padding: 40px; gap: 8px;
-  }
-  .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--green); animation: pulse 1.2s infinite; }
-  .dot:nth-child(2) { animation-delay: 0.2s; }
-  .dot:nth-child(3) { animation-delay: 0.4s; }
-  @keyframes pulse { 0%, 80%, 100% { transform: scale(0.6); opacity: 0.4; } 40% { transform: scale(1); opacity: 1; } }
+  /* Toast */
+  .toast { position:fixed; bottom:90px; left:50%; transform:translateX(-50%); background:#1a2a1a; border:1px solid var(--green); color:var(--green); padding:8px 16px; border-radius:20px; font-size:12px; font-weight:600; z-index:200; display:none; }
+  .toast.show { display:block; }
 </style>
 </head>
 <body>
 
-<!-- Header -->
 <div class="header">
-  <div class="header-logo">📊</div>
+  <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA0MDAgNDAwIiB3aWR0aD0iNDAwIiBoZWlnaHQ9IjQwMCI+CiAgPGRlZnM+CiAgICA8bGluZWFyR3JhZGllbnQgaWQ9ImJnIiB4MT0iMCUiIHkxPSIwJSIgeDI9IjEwMCUiIHkyPSIxMDAlIj4KICAgICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3R5bGU9InN0b3AtY29sb3I6IzBiMGYxZSIvPgogICAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0eWxlPSJzdG9wLWNvbG9yOiMxMTE4MjciLz4KICAgIDwvbGluZWFyR3JhZGllbnQ+CiAgICA8bGluZWFyR3JhZGllbnQgaWQ9ImdvbGQiIHgxPSIwJSIgeTE9IjAlIiB4Mj0iMTAwJSIgeTI9IjEwMCUiPgogICAgICA8c3RvcCBvZmZzZXQ9IjAlIiBzdHlsZT0ic3RvcC1jb2xvcjojRkZENzAwIi8+CiAgICAgIDxzdG9wIG9mZnNldD0iNTAlIiBzdHlsZT0ic3RvcC1jb2xvcjojRkZBNTAwIi8+CiAgICAgIDxzdG9wIG9mZnNldD0iMTAwJSIgc3R5bGU9InN0b3AtY29sb3I6I0ZGOEMwMCIvPgogICAgPC9saW5lYXJHcmFkaWVudD4KICAgIDxsaW5lYXJHcmFkaWVudCBpZD0iZ3JlZW4iIHgxPSIwJSIgeTE9IjAlIiB4Mj0iMTAwJSIgeTI9IjAlIj4KICAgICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3R5bGU9InN0b3AtY29sb3I6IzAwZjVhMCIvPgogICAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0eWxlPSJzdG9wLWNvbG9yOiMwMGQ5ZjUiLz4KICAgIDwvbGluZWFyR3JhZGllbnQ+CiAgICA8bGluZWFyR3JhZGllbnQgaWQ9InJlZCIgeDE9IjAlIiB5MT0iMCUiIHgyPSIxMDAlIiB5Mj0iMCUiPgogICAgICA8c3RvcCBvZmZzZXQ9IjAlIiBzdHlsZT0ic3RvcC1jb2xvcjojZmY0MTZjIi8+CiAgICAgIDxzdG9wIG9mZnNldD0iMTAwJSIgc3R5bGU9InN0b3AtY29sb3I6I2ZmNGIyYiIvPgogICAgPC9saW5lYXJHcmFkaWVudD4KICAgIDxsaW5lYXJHcmFkaWVudCBpZD0iYXJlYUdyYWQiIHgxPSIwJSIgeTE9IjAlIiB4Mj0iMCUiIHkyPSIxMDAlIj4KICAgICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3R5bGU9InN0b3AtY29sb3I6IzAwZjVhMDtzdG9wLW9wYWNpdHk6MC4yNSIvPgogICAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0eWxlPSJzdG9wLWNvbG9yOiMwMGY1YTA7c3RvcC1vcGFjaXR5OjAiLz4KICAgIDwvbGluZWFyR3JhZGllbnQ+CiAgICA8ZmlsdGVyIGlkPSJnbG93IiB4PSItMjAlIiB5PSItMjAlIiB3aWR0aD0iMTQwJSIgaGVpZ2h0PSIxNDAlIj4KICAgICAgPGZlR2F1c3NpYW5CbHVyIHN0ZERldmlhdGlvbj0iMi41IiByZXN1bHQ9ImJsdXIiLz4KICAgICAgPGZlTWVyZ2U+PGZlTWVyZ2VOb2RlIGluPSJibHVyIi8+PGZlTWVyZ2VOb2RlIGluPSJTb3VyY2VHcmFwaGljIi8+PC9mZU1lcmdlPgogICAgPC9maWx0ZXI+CiAgICA8ZmlsdGVyIGlkPSJiaWdnbG93IiB4PSItNDAlIiB5PSItNDAlIiB3aWR0aD0iMTgwJSIgaGVpZ2h0PSIxODAlIj4KICAgICAgPGZlR2F1c3NpYW5CbHVyIHN0ZERldmlhdGlvbj0iNiIgcmVzdWx0PSJibHVyIi8+CiAgICAgIDxmZU1lcmdlPjxmZU1lcmdlTm9kZSBpbj0iYmx1ciIvPjxmZU1lcmdlTm9kZSBpbj0iU291cmNlR3JhcGhpYyIvPjwvZmVNZXJnZT4KICAgIDwvZmlsdGVyPgogICAgPGNsaXBQYXRoIGlkPSJjYyI+PGNpcmNsZSBjeD0iMjAwIiBjeT0iMjAwIiByPSIxODgiLz48L2NsaXBQYXRoPgogIDwvZGVmcz4KCiAgPCEtLSBPdXRlciByaW5nIC0tPgogIDxjaXJjbGUgY3g9IjIwMCIgY3k9IjIwMCIgcj0iMTk2IiBmaWxsPSIjMWEyMjM1Ii8+CiAgPGNpcmNsZSBjeD0iMjAwIiBjeT0iMjAwIiByPSIxOTIiIGZpbGw9InVybCgjYmcpIi8+CgogIDwhLS0gU3VidGxlIGFyYyBkZWNvcmF0aW9uIHRvcCAtLT4KICA8cGF0aCBkPSJNIDYwLDIwMCBBIDE0MCwxNDAgMCAwLDEgMzQwLDIwMCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJ1cmwoI2dvbGQpIiBzdHJva2Utd2lkdGg9IjEiIG9wYWNpdHk9IjAuMTUiIGNsaXAtcGF0aD0idXJsKCNjYykiLz4KCiAgPCEtLSBHcmlkIC0tPgogIDxnIGNsaXAtcGF0aD0idXJsKCNjYykiIG9wYWNpdHk9IjAuMDYiIHN0cm9rZT0iIzAwZjVhMCIgc3Ryb2tlLXdpZHRoPSIwLjgiPgogICAgPGxpbmUgeDE9IjAiIHkxPSIxMzAiIHgyPSI0MDAiIHkyPSIxMzAiLz4KICAgIDxsaW5lIHgxPSIwIiB5MT0iMTc1IiB4Mj0iNDAwIiB5Mj0iMTc1Ii8+CiAgICA8bGluZSB4MT0iMCIgeTE9IjIyMCIgeDI9IjQwMCIgeTI9IjIyMCIvPgogICAgPGxpbmUgeDE9IjAiIHkxPSIyNjUiIHgyPSI0MDAiIHkyPSIyNjUiLz4KICAgIDxsaW5lIHgxPSI5NSIgeTE9IjkwIiB4Mj0iOTUiIHkyPSIzMDAiLz4KICAgIDxsaW5lIHgxPSIxNDgiIHkxPSI5MCIgeDI9IjE0OCIgeTI9IjMwMCIvPgogICAgPGxpbmUgeDE9IjIwMSIgeTE9IjkwIiB4Mj0iMjAxIiB5Mj0iMzAwIi8+CiAgICA8bGluZSB4MT0iMjU0IiB5MT0iOTAiIHgyPSIyNTQiIHkyPSIzMDAiLz4KICAgIDxsaW5lIHgxPSIzMDciIHkxPSI5MCIgeDI9IjMwNyIgeTI9IjMwMCIvPgogIDwvZz4KCiAgPCEtLSBBcmVhIGZpbGwgdW5kZXIgY2hhcnQgLS0+CiAgPHBvbHlnb24KICAgIHBvaW50cz0iNzUsMjU1IDExNSwyMTUgMTQ4LDIzMiAxODMsMTY4IDIxOCwxODggMjUzLDEzOCAyOTUsMTUyIDI5NSwyNzUgNzUsMjc1IgogICAgZmlsbD0idXJsKCNhcmVhR3JhZCkiCiAgICBjbGlwLXBhdGg9InVybCgjY2MpIgogIC8+CgogIDwhLS0gQ2hhcnQgbGluZSAtLT4KICA8cG9seWxpbmUKICAgIHBvaW50cz0iNzUsMjU1IDExNSwyMTUgMTQ4LDIzMiAxODMsMTY4IDIxOCwxODggMjUzLDEzOCAyOTUsMTUyIgogICAgZmlsbD0ibm9uZSIgc3Ryb2tlPSJ1cmwoI2dyZWVuKSIgc3Ryb2tlLXdpZHRoPSIzLjUiCiAgICBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiCiAgICBmaWx0ZXI9InVybCgjZ2xvdykiIGNsaXAtcGF0aD0idXJsKCNjYykiCiAgLz4KCiAgPCEtLSBDYW5kbGVzdGlja3MgLS0+CiAgPCEtLSAxIHJlZCAtLT4KICA8ZyBmaWx0ZXI9InVybCgjZ2xvdykiIGNsaXAtcGF0aD0idXJsKCNjYykiPgogICAgPGxpbmUgeDE9IjEwMCIgeTE9IjIwNSIgeDI9IjEwMCIgeTI9IjIyOCIgc3Ryb2tlPSJ1cmwoI3JlZCkiIHN0cm9rZS13aWR0aD0iMS41Ii8+CiAgICA8cmVjdCB4PSI5NC41IiB5PSIyMDkiIHdpZHRoPSIxMSIgaGVpZ2h0PSIxMyIgZmlsbD0idXJsKCNyZWQpIiByeD0iMS41Ii8+CiAgPC9nPgogIDwhLS0gMiBncmVlbiAtLT4KICA8ZyBmaWx0ZXI9InVybCgjZ2xvdykiIGNsaXAtcGF0aD0idXJsKCNjYykiPgogICAgPGxpbmUgeDE9IjEzMCIgeTE9IjIyMCIgeDI9IjEzMCIgeTI9IjI0MiIgc3Ryb2tlPSJ1cmwoI2dyZWVuKSIgc3Ryb2tlLXdpZHRoPSIxLjUiLz4KICAgIDxyZWN0IHg9IjEyNC41IiB5PSIyMjIiIHdpZHRoPSIxMSIgaGVpZ2h0PSIxMyIgZmlsbD0idXJsKCNncmVlbikiIHJ4PSIxLjUiLz4KICA8L2c+CiAgPCEtLSAzIGdyZWVuIC0tPgogIDxnIGZpbHRlcj0idXJsKCNnbG93KSIgY2xpcC1wYXRoPSJ1cmwoI2NjKSI+CiAgICA8bGluZSB4MT0iMTYzIiB5MT0iMTU3IiB4Mj0iMTYzIiB5Mj0iMTgwIiBzdHJva2U9InVybCgjZ3JlZW4pIiBzdHJva2Utd2lkdGg9IjEuNSIvPgogICAgPHJlY3QgeD0iMTU3LjUiIHk9IjE2MCIgd2lkdGg9IjExIiBoZWlnaHQ9IjE0IiBmaWxsPSJ1cmwoI2dyZWVuKSIgcng9IjEuNSIvPgogIDwvZz4KICA8IS0tIDQgcmVkIC0tPgogIDxnIGZpbHRlcj0idXJsKCNnbG93KSIgY2xpcC1wYXRoPSJ1cmwoI2NjKSI+CiAgICA8bGluZSB4MT0iMTk2IiB5MT0iMTc4IiB4Mj0iMTk2IiB5Mj0iMjAwIiBzdHJva2U9InVybCgjcmVkKSIgc3Ryb2tlLXdpZHRoPSIxLjUiLz4KICAgIDxyZWN0IHg9IjE5MC41IiB5PSIxODAiIHdpZHRoPSIxMSIgaGVpZ2h0PSIxMyIgZmlsbD0idXJsKCNyZWQpIiByeD0iMS41Ii8+CiAgPC9nPgogIDwhLS0gNSBncmVlbiAtLT4KICA8ZyBmaWx0ZXI9InVybCgjZ2xvdykiIGNsaXAtcGF0aD0idXJsKCNjYykiPgogICAgPGxpbmUgeDE9IjIyOSIgeTE9IjEyOCIgeDI9IjIyOSIgeTI9IjE1MiIgc3Ryb2tlPSJ1cmwoI2dyZWVuKSIgc3Ryb2tlLXdpZHRoPSIxLjUiLz4KICAgIDxyZWN0IHg9IjIyMy41IiB5PSIxMzEiIHdpZHRoPSIxMSIgaGVpZ2h0PSIxNSIgZmlsbD0idXJsKCNncmVlbikiIHJ4PSIxLjUiLz4KICA8L2c+CiAgPCEtLSA2IGdyZWVuIC0tPgogIDxnIGZpbHRlcj0idXJsKCNnbG93KSIgY2xpcC1wYXRoPSJ1cmwoI2NjKSI+CiAgICA8bGluZSB4MT0iMjYyIiB5MT0iMTQzIiB4Mj0iMjYyIiB5Mj0iMTY1IiBzdHJva2U9InVybCgjZ3JlZW4pIiBzdHJva2Utd2lkdGg9IjEuNSIvPgogICAgPHJlY3QgeD0iMjU2LjUiIHk9IjE0NSIgd2lkdGg9IjExIiBoZWlnaHQ9IjEzIiBmaWxsPSJ1cmwoI2dyZWVuKSIgcng9IjEuNSIvPgogIDwvZz4KCiAgPCEtLSBMaXZlIGRvdCAtLT4KICA8Y2lyY2xlIGN4PSIyOTUiIGN5PSIxNTIiIHI9IjEwIiBmaWxsPSIjMDBmNWEwIiBvcGFjaXR5PSIwLjE1IiBmaWx0ZXI9InVybCgjYmlnZ2xvdykiLz4KICA8Y2lyY2xlIGN4PSIyOTUiIGN5PSIxNTIiIHI9IjUuNSIgZmlsbD0iIzAwZjVhMCIgZmlsdGVyPSJ1cmwoI2dsb3cpIi8+CiAgPGNpcmNsZSBjeD0iMjk1IiBjeT0iMTUyIiByPSIyLjUiIGZpbGw9IiNmZmZmZmYiLz4KCiAgPCEtLSBBSSBicmFpbiBpY29uIChzaW1wbGlmaWVkKSAtLT4KICA8ZyB0cmFuc2Zvcm09InRyYW5zbGF0ZSg1MiwgNTIpIiBmaWx0ZXI9InVybCgjZ2xvdykiPgogICAgPGNpcmNsZSBjeD0iMCIgY3k9IjAiIHI9IjIyIiBmaWxsPSJub25lIiBzdHJva2U9InVybCgjZ29sZCkiIHN0cm9rZS13aWR0aD0iMS41IiBvcGFjaXR5PSIwLjYiLz4KICAgIDwhLS0gYnJhaW4gc2hhcGUgc2ltcGxpZmllZCBhcyBjaXJjdWl0IG5vZGVzIC0tPgogICAgPGNpcmNsZSBjeD0iMCIgY3k9Ii04IiByPSIzIiBmaWxsPSJ1cmwoI2dvbGQpIiBvcGFjaXR5PSIwLjgiLz4KICAgIDxjaXJjbGUgY3g9IjgiIGN5PSI0IiByPSIzIiBmaWxsPSJ1cmwoI2dvbGQpIiBvcGFjaXR5PSIwLjgiLz4KICAgIDxjaXJjbGUgY3g9Ii04IiBjeT0iNCIgcj0iMyIgZmlsbD0idXJsKCNnb2xkKSIgb3BhY2l0eT0iMC44Ii8+CiAgICA8bGluZSB4MT0iMCIgeTE9Ii01IiB4Mj0iOCIgeTI9IjQiIHN0cm9rZT0idXJsKCNnb2xkKSIgc3Ryb2tlLXdpZHRoPSIxIiBvcGFjaXR5PSIwLjYiLz4KICAgIDxsaW5lIHgxPSIwIiB5MT0iLTUiIHgyPSItOCIgeTI9IjQiIHN0cm9rZT0idXJsKCNnb2xkKSIgc3Ryb2tlLXdpZHRoPSIxIiBvcGFjaXR5PSIwLjYiLz4KICAgIDxsaW5lIHgxPSI4IiB5MT0iNCIgeDI9Ii04IiB5Mj0iNCIgc3Ryb2tlPSJ1cmwoI2dvbGQpIiBzdHJva2Utd2lkdGg9IjEiIG9wYWNpdHk9IjAuNiIvPgogIDwvZz4KCiAgPCEtLSBTaWduYWwgYmFkZ2UgdG9wIHJpZ2h0IC0tPgogIDxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKDMzMCwgNzUpIj4KICAgIDxjaXJjbGUgY3g9IjAiIGN5PSIwIiByPSIyMCIgZmlsbD0iIzFhMjIzNSIgc3Ryb2tlPSJ1cmwoI2dyZWVuKSIgc3Ryb2tlLXdpZHRoPSIxLjUiLz4KICAgIDx0ZXh0IHg9IjAiIHk9IjUiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIxMSIgZm9udC13ZWlnaHQ9ImJvbGQiCiAgICAgIGZpbGw9InVybCgjZ3JlZW4pIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIj5BSTwvdGV4dD4KICA8L2c+CgogIDwhLS0gQm90dG9tIGxhYmVsIC0tPgogIDwhLS0gRGFyayBwaWxsIGJhY2tncm91bmQgLS0+CiAgPHJlY3QgeD0iODAiIHk9IjI5NiIgd2lkdGg9IjI0MCIgaGVpZ2h0PSI2NCIgcng9IjMyIiBmaWxsPSIjMGQxMzIyIiBvcGFjaXR5PSIwLjkiLz4KICA8cmVjdCB4PSI4MiIgeT0iMjk4IiB3aWR0aD0iMjM2IiBoZWlnaHQ9IjYwIiByeD0iMzAiIGZpbGw9Im5vbmUiIHN0cm9rZT0idXJsKCNnb2xkKSIgc3Ryb2tlLXdpZHRoPSIxIiBvcGFjaXR5PSIwLjQiLz4KCiAgPHRleHQgeD0iMjAwIiB5PSIzMjMiIGZvbnQtZmFtaWx5PSInQXJpYWwgQmxhY2snLCBBcmlhbCwgc2Fucy1zZXJpZiIKICAgIGZvbnQtc2l6ZT0iMjIiIGZvbnQtd2VpZ2h0PSI5MDAiIGZpbGw9InVybCgjZ29sZCkiCiAgICB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBsZXR0ZXItc3BhY2luZz0iMyIgZmlsdGVyPSJ1cmwoI2dsb3cpIj5BTkFMSVo8L3RleHQ+CiAgPHRleHQgeD0iMjAwIiB5PSIzNDUiIGZvbnQtZmFtaWx5PSJBcmlhbCwgc2Fucy1zZXJpZiIKICAgIGZvbnQtc2l6ZT0iMTEiIGZvbnQtd2VpZ2h0PSI1MDAiIGZpbGw9IiM3YThmYTgiCiAgICB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBsZXR0ZXItc3BhY2luZz0iNSI+VFJBRElORyBCT1Q8L3RleHQ+CgogIDwhLS0gT3V0ZXIgYm9yZGVyIC0tPgogIDxjaXJjbGUgY3g9IjIwMCIgY3k9IjIwMCIgcj0iMTkyIiBmaWxsPSJub25lIiBzdHJva2U9InVybCgjZ29sZCkiIHN0cm9rZS13aWR0aD0iMS41IiBvcGFjaXR5PSIwLjMiLz4KICA8Y2lyY2xlIGN4PSIyMDAiIGN5PSIyMDAiIHI9IjE4OCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJ1cmwoI2dyZWVuKSIgc3Ryb2tlLXdpZHRoPSIwLjUiIG9wYWNpdHk9IjAuMiIvPgo8L3N2Zz4K" alt="logo" onerror="this.style.display='none'">
   <div class="header-info">
     <h1>Forex Analiz Bot</h1>
     <p>AI Trading Assistant</p>
@@ -377,72 +211,71 @@
   <div class="header-badge" id="premiumBadge">FREE</div>
 </div>
 
-<!-- ═══ HOME PAGE ═══ -->
+<div class="toast" id="toast"></div>
+
+<!-- HOME -->
 <div class="page active" id="page-home">
   <div class="hero">
-    <div class="hero-greeting">Xush kelibsiz 👋</div>
-    <div class="hero-name" id="heroName">Trader</div>
-    <div class="hero-status">
-      <div class="stat-pill">📊 Tahlillar: <span id="analysisCount">0</span></div>
-      <div class="stat-pill">🎁 Bepul: <span id="freeLeft">7</span></div>
+    <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA0MDAgNDAwIiB3aWR0aD0iNDAwIiBoZWlnaHQ9IjQwMCI+CiAgPGRlZnM+CiAgICA8bGluZWFyR3JhZGllbnQgaWQ9ImJnIiB4MT0iMCUiIHkxPSIwJSIgeDI9IjEwMCUiIHkyPSIxMDAlIj4KICAgICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3R5bGU9InN0b3AtY29sb3I6IzBiMGYxZSIvPgogICAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0eWxlPSJzdG9wLWNvbG9yOiMxMTE4MjciLz4KICAgIDwvbGluZWFyR3JhZGllbnQ+CiAgICA8bGluZWFyR3JhZGllbnQgaWQ9ImdvbGQiIHgxPSIwJSIgeTE9IjAlIiB4Mj0iMTAwJSIgeTI9IjEwMCUiPgogICAgICA8c3RvcCBvZmZzZXQ9IjAlIiBzdHlsZT0ic3RvcC1jb2xvcjojRkZENzAwIi8+CiAgICAgIDxzdG9wIG9mZnNldD0iNTAlIiBzdHlsZT0ic3RvcC1jb2xvcjojRkZBNTAwIi8+CiAgICAgIDxzdG9wIG9mZnNldD0iMTAwJSIgc3R5bGU9InN0b3AtY29sb3I6I0ZGOEMwMCIvPgogICAgPC9saW5lYXJHcmFkaWVudD4KICAgIDxsaW5lYXJHcmFkaWVudCBpZD0iZ3JlZW4iIHgxPSIwJSIgeTE9IjAlIiB4Mj0iMTAwJSIgeTI9IjAlIj4KICAgICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3R5bGU9InN0b3AtY29sb3I6IzAwZjVhMCIvPgogICAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0eWxlPSJzdG9wLWNvbG9yOiMwMGQ5ZjUiLz4KICAgIDwvbGluZWFyR3JhZGllbnQ+CiAgICA8bGluZWFyR3JhZGllbnQgaWQ9InJlZCIgeDE9IjAlIiB5MT0iMCUiIHgyPSIxMDAlIiB5Mj0iMCUiPgogICAgICA8c3RvcCBvZmZzZXQ9IjAlIiBzdHlsZT0ic3RvcC1jb2xvcjojZmY0MTZjIi8+CiAgICAgIDxzdG9wIG9mZnNldD0iMTAwJSIgc3R5bGU9InN0b3AtY29sb3I6I2ZmNGIyYiIvPgogICAgPC9saW5lYXJHcmFkaWVudD4KICAgIDxsaW5lYXJHcmFkaWVudCBpZD0iYXJlYUdyYWQiIHgxPSIwJSIgeTE9IjAlIiB4Mj0iMCUiIHkyPSIxMDAlIj4KICAgICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3R5bGU9InN0b3AtY29sb3I6IzAwZjVhMDtzdG9wLW9wYWNpdHk6MC4yNSIvPgogICAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0eWxlPSJzdG9wLWNvbG9yOiMwMGY1YTA7c3RvcC1vcGFjaXR5OjAiLz4KICAgIDwvbGluZWFyR3JhZGllbnQ+CiAgICA8ZmlsdGVyIGlkPSJnbG93IiB4PSItMjAlIiB5PSItMjAlIiB3aWR0aD0iMTQwJSIgaGVpZ2h0PSIxNDAlIj4KICAgICAgPGZlR2F1c3NpYW5CbHVyIHN0ZERldmlhdGlvbj0iMi41IiByZXN1bHQ9ImJsdXIiLz4KICAgICAgPGZlTWVyZ2U+PGZlTWVyZ2VOb2RlIGluPSJibHVyIi8+PGZlTWVyZ2VOb2RlIGluPSJTb3VyY2VHcmFwaGljIi8+PC9mZU1lcmdlPgogICAgPC9maWx0ZXI+CiAgICA8ZmlsdGVyIGlkPSJiaWdnbG93IiB4PSItNDAlIiB5PSItNDAlIiB3aWR0aD0iMTgwJSIgaGVpZ2h0PSIxODAlIj4KICAgICAgPGZlR2F1c3NpYW5CbHVyIHN0ZERldmlhdGlvbj0iNiIgcmVzdWx0PSJibHVyIi8+CiAgICAgIDxmZU1lcmdlPjxmZU1lcmdlTm9kZSBpbj0iYmx1ciIvPjxmZU1lcmdlTm9kZSBpbj0iU291cmNlR3JhcGhpYyIvPjwvZmVNZXJnZT4KICAgIDwvZmlsdGVyPgogICAgPGNsaXBQYXRoIGlkPSJjYyI+PGNpcmNsZSBjeD0iMjAwIiBjeT0iMjAwIiByPSIxODgiLz48L2NsaXBQYXRoPgogIDwvZGVmcz4KCiAgPCEtLSBPdXRlciByaW5nIC0tPgogIDxjaXJjbGUgY3g9IjIwMCIgY3k9IjIwMCIgcj0iMTk2IiBmaWxsPSIjMWEyMjM1Ii8+CiAgPGNpcmNsZSBjeD0iMjAwIiBjeT0iMjAwIiByPSIxOTIiIGZpbGw9InVybCgjYmcpIi8+CgogIDwhLS0gU3VidGxlIGFyYyBkZWNvcmF0aW9uIHRvcCAtLT4KICA8cGF0aCBkPSJNIDYwLDIwMCBBIDE0MCwxNDAgMCAwLDEgMzQwLDIwMCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJ1cmwoI2dvbGQpIiBzdHJva2Utd2lkdGg9IjEiIG9wYWNpdHk9IjAuMTUiIGNsaXAtcGF0aD0idXJsKCNjYykiLz4KCiAgPCEtLSBHcmlkIC0tPgogIDxnIGNsaXAtcGF0aD0idXJsKCNjYykiIG9wYWNpdHk9IjAuMDYiIHN0cm9rZT0iIzAwZjVhMCIgc3Ryb2tlLXdpZHRoPSIwLjgiPgogICAgPGxpbmUgeDE9IjAiIHkxPSIxMzAiIHgyPSI0MDAiIHkyPSIxMzAiLz4KICAgIDxsaW5lIHgxPSIwIiB5MT0iMTc1IiB4Mj0iNDAwIiB5Mj0iMTc1Ii8+CiAgICA8bGluZSB4MT0iMCIgeTE9IjIyMCIgeDI9IjQwMCIgeTI9IjIyMCIvPgogICAgPGxpbmUgeDE9IjAiIHkxPSIyNjUiIHgyPSI0MDAiIHkyPSIyNjUiLz4KICAgIDxsaW5lIHgxPSI5NSIgeTE9IjkwIiB4Mj0iOTUiIHkyPSIzMDAiLz4KICAgIDxsaW5lIHgxPSIxNDgiIHkxPSI5MCIgeDI9IjE0OCIgeTI9IjMwMCIvPgogICAgPGxpbmUgeDE9IjIwMSIgeTE9IjkwIiB4Mj0iMjAxIiB5Mj0iMzAwIi8+CiAgICA8bGluZSB4MT0iMjU0IiB5MT0iOTAiIHgyPSIyNTQiIHkyPSIzMDAiLz4KICAgIDxsaW5lIHgxPSIzMDciIHkxPSI5MCIgeDI9IjMwNyIgeTI9IjMwMCIvPgogIDwvZz4KCiAgPCEtLSBBcmVhIGZpbGwgdW5kZXIgY2hhcnQgLS0+CiAgPHBvbHlnb24KICAgIHBvaW50cz0iNzUsMjU1IDExNSwyMTUgMTQ4LDIzMiAxODMsMTY4IDIxOCwxODggMjUzLDEzOCAyOTUsMTUyIDI5NSwyNzUgNzUsMjc1IgogICAgZmlsbD0idXJsKCNhcmVhR3JhZCkiCiAgICBjbGlwLXBhdGg9InVybCgjY2MpIgogIC8+CgogIDwhLS0gQ2hhcnQgbGluZSAtLT4KICA8cG9seWxpbmUKICAgIHBvaW50cz0iNzUsMjU1IDExNSwyMTUgMTQ4LDIzMiAxODMsMTY4IDIxOCwxODggMjUzLDEzOCAyOTUsMTUyIgogICAgZmlsbD0ibm9uZSIgc3Ryb2tlPSJ1cmwoI2dyZWVuKSIgc3Ryb2tlLXdpZHRoPSIzLjUiCiAgICBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiCiAgICBmaWx0ZXI9InVybCgjZ2xvdykiIGNsaXAtcGF0aD0idXJsKCNjYykiCiAgLz4KCiAgPCEtLSBDYW5kbGVzdGlja3MgLS0+CiAgPCEtLSAxIHJlZCAtLT4KICA8ZyBmaWx0ZXI9InVybCgjZ2xvdykiIGNsaXAtcGF0aD0idXJsKCNjYykiPgogICAgPGxpbmUgeDE9IjEwMCIgeTE9IjIwNSIgeDI9IjEwMCIgeTI9IjIyOCIgc3Ryb2tlPSJ1cmwoI3JlZCkiIHN0cm9rZS13aWR0aD0iMS41Ii8+CiAgICA8cmVjdCB4PSI5NC41IiB5PSIyMDkiIHdpZHRoPSIxMSIgaGVpZ2h0PSIxMyIgZmlsbD0idXJsKCNyZWQpIiByeD0iMS41Ii8+CiAgPC9nPgogIDwhLS0gMiBncmVlbiAtLT4KICA8ZyBmaWx0ZXI9InVybCgjZ2xvdykiIGNsaXAtcGF0aD0idXJsKCNjYykiPgogICAgPGxpbmUgeDE9IjEzMCIgeTE9IjIyMCIgeDI9IjEzMCIgeTI9IjI0MiIgc3Ryb2tlPSJ1cmwoI2dyZWVuKSIgc3Ryb2tlLXdpZHRoPSIxLjUiLz4KICAgIDxyZWN0IHg9IjEyNC41IiB5PSIyMjIiIHdpZHRoPSIxMSIgaGVpZ2h0PSIxMyIgZmlsbD0idXJsKCNncmVlbikiIHJ4PSIxLjUiLz4KICA8L2c+CiAgPCEtLSAzIGdyZWVuIC0tPgogIDxnIGZpbHRlcj0idXJsKCNnbG93KSIgY2xpcC1wYXRoPSJ1cmwoI2NjKSI+CiAgICA8bGluZSB4MT0iMTYzIiB5MT0iMTU3IiB4Mj0iMTYzIiB5Mj0iMTgwIiBzdHJva2U9InVybCgjZ3JlZW4pIiBzdHJva2Utd2lkdGg9IjEuNSIvPgogICAgPHJlY3QgeD0iMTU3LjUiIHk9IjE2MCIgd2lkdGg9IjExIiBoZWlnaHQ9IjE0IiBmaWxsPSJ1cmwoI2dyZWVuKSIgcng9IjEuNSIvPgogIDwvZz4KICA8IS0tIDQgcmVkIC0tPgogIDxnIGZpbHRlcj0idXJsKCNnbG93KSIgY2xpcC1wYXRoPSJ1cmwoI2NjKSI+CiAgICA8bGluZSB4MT0iMTk2IiB5MT0iMTc4IiB4Mj0iMTk2IiB5Mj0iMjAwIiBzdHJva2U9InVybCgjcmVkKSIgc3Ryb2tlLXdpZHRoPSIxLjUiLz4KICAgIDxyZWN0IHg9IjE5MC41IiB5PSIxODAiIHdpZHRoPSIxMSIgaGVpZ2h0PSIxMyIgZmlsbD0idXJsKCNyZWQpIiByeD0iMS41Ii8+CiAgPC9nPgogIDwhLS0gNSBncmVlbiAtLT4KICA8ZyBmaWx0ZXI9InVybCgjZ2xvdykiIGNsaXAtcGF0aD0idXJsKCNjYykiPgogICAgPGxpbmUgeDE9IjIyOSIgeTE9IjEyOCIgeDI9IjIyOSIgeTI9IjE1MiIgc3Ryb2tlPSJ1cmwoI2dyZWVuKSIgc3Ryb2tlLXdpZHRoPSIxLjUiLz4KICAgIDxyZWN0IHg9IjIyMy41IiB5PSIxMzEiIHdpZHRoPSIxMSIgaGVpZ2h0PSIxNSIgZmlsbD0idXJsKCNncmVlbikiIHJ4PSIxLjUiLz4KICA8L2c+CiAgPCEtLSA2IGdyZWVuIC0tPgogIDxnIGZpbHRlcj0idXJsKCNnbG93KSIgY2xpcC1wYXRoPSJ1cmwoI2NjKSI+CiAgICA8bGluZSB4MT0iMjYyIiB5MT0iMTQzIiB4Mj0iMjYyIiB5Mj0iMTY1IiBzdHJva2U9InVybCgjZ3JlZW4pIiBzdHJva2Utd2lkdGg9IjEuNSIvPgogICAgPHJlY3QgeD0iMjU2LjUiIHk9IjE0NSIgd2lkdGg9IjExIiBoZWlnaHQ9IjEzIiBmaWxsPSJ1cmwoI2dyZWVuKSIgcng9IjEuNSIvPgogIDwvZz4KCiAgPCEtLSBMaXZlIGRvdCAtLT4KICA8Y2lyY2xlIGN4PSIyOTUiIGN5PSIxNTIiIHI9IjEwIiBmaWxsPSIjMDBmNWEwIiBvcGFjaXR5PSIwLjE1IiBmaWx0ZXI9InVybCgjYmlnZ2xvdykiLz4KICA8Y2lyY2xlIGN4PSIyOTUiIGN5PSIxNTIiIHI9IjUuNSIgZmlsbD0iIzAwZjVhMCIgZmlsdGVyPSJ1cmwoI2dsb3cpIi8+CiAgPGNpcmNsZSBjeD0iMjk1IiBjeT0iMTUyIiByPSIyLjUiIGZpbGw9IiNmZmZmZmYiLz4KCiAgPCEtLSBBSSBicmFpbiBpY29uIChzaW1wbGlmaWVkKSAtLT4KICA8ZyB0cmFuc2Zvcm09InRyYW5zbGF0ZSg1MiwgNTIpIiBmaWx0ZXI9InVybCgjZ2xvdykiPgogICAgPGNpcmNsZSBjeD0iMCIgY3k9IjAiIHI9IjIyIiBmaWxsPSJub25lIiBzdHJva2U9InVybCgjZ29sZCkiIHN0cm9rZS13aWR0aD0iMS41IiBvcGFjaXR5PSIwLjYiLz4KICAgIDwhLS0gYnJhaW4gc2hhcGUgc2ltcGxpZmllZCBhcyBjaXJjdWl0IG5vZGVzIC0tPgogICAgPGNpcmNsZSBjeD0iMCIgY3k9Ii04IiByPSIzIiBmaWxsPSJ1cmwoI2dvbGQpIiBvcGFjaXR5PSIwLjgiLz4KICAgIDxjaXJjbGUgY3g9IjgiIGN5PSI0IiByPSIzIiBmaWxsPSJ1cmwoI2dvbGQpIiBvcGFjaXR5PSIwLjgiLz4KICAgIDxjaXJjbGUgY3g9Ii04IiBjeT0iNCIgcj0iMyIgZmlsbD0idXJsKCNnb2xkKSIgb3BhY2l0eT0iMC44Ii8+CiAgICA8bGluZSB4MT0iMCIgeTE9Ii01IiB4Mj0iOCIgeTI9IjQiIHN0cm9rZT0idXJsKCNnb2xkKSIgc3Ryb2tlLXdpZHRoPSIxIiBvcGFjaXR5PSIwLjYiLz4KICAgIDxsaW5lIHgxPSIwIiB5MT0iLTUiIHgyPSItOCIgeTI9IjQiIHN0cm9rZT0idXJsKCNnb2xkKSIgc3Ryb2tlLXdpZHRoPSIxIiBvcGFjaXR5PSIwLjYiLz4KICAgIDxsaW5lIHgxPSI4IiB5MT0iNCIgeDI9Ii04IiB5Mj0iNCIgc3Ryb2tlPSJ1cmwoI2dvbGQpIiBzdHJva2Utd2lkdGg9IjEiIG9wYWNpdHk9IjAuNiIvPgogIDwvZz4KCiAgPCEtLSBTaWduYWwgYmFkZ2UgdG9wIHJpZ2h0IC0tPgogIDxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKDMzMCwgNzUpIj4KICAgIDxjaXJjbGUgY3g9IjAiIGN5PSIwIiByPSIyMCIgZmlsbD0iIzFhMjIzNSIgc3Ryb2tlPSJ1cmwoI2dyZWVuKSIgc3Ryb2tlLXdpZHRoPSIxLjUiLz4KICAgIDx0ZXh0IHg9IjAiIHk9IjUiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIxMSIgZm9udC13ZWlnaHQ9ImJvbGQiCiAgICAgIGZpbGw9InVybCgjZ3JlZW4pIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIj5BSTwvdGV4dD4KICA8L2c+CgogIDwhLS0gQm90dG9tIGxhYmVsIC0tPgogIDwhLS0gRGFyayBwaWxsIGJhY2tncm91bmQgLS0+CiAgPHJlY3QgeD0iODAiIHk9IjI5NiIgd2lkdGg9IjI0MCIgaGVpZ2h0PSI2NCIgcng9IjMyIiBmaWxsPSIjMGQxMzIyIiBvcGFjaXR5PSIwLjkiLz4KICA8cmVjdCB4PSI4MiIgeT0iMjk4IiB3aWR0aD0iMjM2IiBoZWlnaHQ9IjYwIiByeD0iMzAiIGZpbGw9Im5vbmUiIHN0cm9rZT0idXJsKCNnb2xkKSIgc3Ryb2tlLXdpZHRoPSIxIiBvcGFjaXR5PSIwLjQiLz4KCiAgPHRleHQgeD0iMjAwIiB5PSIzMjMiIGZvbnQtZmFtaWx5PSInQXJpYWwgQmxhY2snLCBBcmlhbCwgc2Fucy1zZXJpZiIKICAgIGZvbnQtc2l6ZT0iMjIiIGZvbnQtd2VpZ2h0PSI5MDAiIGZpbGw9InVybCgjZ29sZCkiCiAgICB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBsZXR0ZXItc3BhY2luZz0iMyIgZmlsdGVyPSJ1cmwoI2dsb3cpIj5BTkFMSVo8L3RleHQ+CiAgPHRleHQgeD0iMjAwIiB5PSIzNDUiIGZvbnQtZmFtaWx5PSJBcmlhbCwgc2Fucy1zZXJpZiIKICAgIGZvbnQtc2l6ZT0iMTEiIGZvbnQtd2VpZ2h0PSI1MDAiIGZpbGw9IiM3YThmYTgiCiAgICB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBsZXR0ZXItc3BhY2luZz0iNSI+VFJBRElORyBCT1Q8L3RleHQ+CgogIDwhLS0gT3V0ZXIgYm9yZGVyIC0tPgogIDxjaXJjbGUgY3g9IjIwMCIgY3k9IjIwMCIgcj0iMTkyIiBmaWxsPSJub25lIiBzdHJva2U9InVybCgjZ29sZCkiIHN0cm9rZS13aWR0aD0iMS41IiBvcGFjaXR5PSIwLjMiLz4KICA8Y2lyY2xlIGN4PSIyMDAiIGN5PSIyMDAiIHI9IjE4OCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJ1cmwoI2dyZWVuKSIgc3Ryb2tlLXdpZHRoPSIwLjUiIG9wYWNpdHk9IjAuMiIvPgo8L3N2Zz4K" alt="logo" onerror="this.style.display='none'">
+    <h2 id="heroName">Trader</h2>
+    <p>Forex • Crypto • Aksiya • Tovar</p>
+    <div class="hero-stats">
+      <div class="stat-pill">📊 <span id="analysisCount">0</span> tahlil</div>
+      <div class="stat-pill">🎁 <span id="freeLeft">7</span> bepul</div>
     </div>
   </div>
 
-  <!-- Main CTA -->
-  <button class="main-cta" onclick="sendAnalysis()">
+  <button class="main-cta" onclick="goPage('analyze')">
     <div class="main-cta-icon">📸</div>
-    <div class="main-cta-text">
-      <h3>Grafik Tahlil</h3>
-      <p>Skrinshot yuboring — AI tahlil qiladi</p>
-    </div>
+    <div class="main-cta-text"><h3>Grafik Tahlil</h3><p>Rasm yuklang — AI tahlil qiladi</p></div>
     <div class="main-cta-arrow">›</div>
   </button>
 
-  <!-- Markets -->
-  <div class="section">
+  <div class="section" style="margin-top:12px">
     <div class="section-title">Bozor Narxlari</div>
-    <div class="market-grid" id="marketGrid">
-      <div class="market-item"><div class="m-name">BTC/USD</div><div class="m-price" id="btcPrice">—</div><div class="m-change m-up" id="btcChange">Yuklanmoqda</div></div>
-      <div class="market-item"><div class="m-name">ETH/USD</div><div class="m-price" id="ethPrice">—</div><div class="m-change m-up" id="ethChange">Yuklanmoqda</div></div>
-      <div class="market-item"><div class="m-name">GOLD</div><div class="m-price" id="goldPrice">—</div><div class="m-change" id="goldChange">Yuklanmoqda</div></div>
-      <div class="market-item"><div class="m-name">EUR/USD</div><div class="m-price" id="eurPrice">—</div><div class="m-change" id="eurChange">Yuklanmoqda</div></div>
+    <div class="market-grid">
+      <div class="market-item"><div class="m-name">BTC/USD</div><div class="m-price" id="btcPrice">—</div><div class="m-up" id="btcChange" style="font-size:10px">...</div></div>
+      <div class="market-item"><div class="m-name">ETH/USD</div><div class="m-price" id="ethPrice">—</div><div class="m-up" id="ethChange" style="font-size:10px">...</div></div>
+      <div class="market-item"><div class="m-name">GOLD</div><div class="m-price">~$3,300</div><div class="m-up" style="font-size:10px">XAU/USD</div></div>
+      <div class="market-item"><div class="m-name">EUR/USD</div><div class="m-price" id="eurPrice">—</div><div class="m-up" style="font-size:10px">Live</div></div>
     </div>
   </div>
 
-  <div style="height:10px"></div>
-
-  <!-- Feature buttons -->
-  <div class="section">
-    <div class="section-title">Asosiy Xizmatlar</div>
+  <div class="section" style="margin-top:12px">
+    <div class="section-title">Xizmatlar</div>
     <div class="btn-grid">
-      <button class="grid-btn btn-purple" onclick="goPage('calc')">
-        <div class="btn-icon">🧮</div>
-        <div class="btn-label">Kalkulyator</div>
-        <div class="btn-sub">Risk hisoblash</div>
-      </button>
-      <button class="grid-btn btn-blue" onclick="goPage('history')">
-        <div class="btn-icon">📜</div>
-        <div class="btn-label">Tarix</div>
-        <div class="btn-sub">Tahlillarim</div>
-      </button>
-      <button class="grid-btn btn-green" onclick="goPage('referral')">
-        <div class="btn-icon">👥</div>
-        <div class="btn-label">Referral</div>
-        <div class="btn-sub">Do'st taklif qil</div>
-      </button>
-      <button class="grid-btn btn-gold" onclick="goPage('premium')">
-        <div class="btn-icon">💎</div>
-        <div class="btn-label">Premium</div>
-        <div class="btn-sub">Cheksiz tahlil</div>
-      </button>
+      <button class="grid-btn btn-green" onclick="goPage('analyze')"><div class="btn-icon">📸</div><div class="btn-label">Tahlil</div><div class="btn-sub">AI analiz</div></button>
+      <button class="grid-btn btn-gold" onclick="goPage('premium')"><div class="btn-icon">💎</div><div class="btn-label">Premium</div><div class="btn-sub">Cheksiz</div></button>
+      <button class="grid-btn btn-blue" onclick="goPage('calc')"><div class="btn-icon">🧮</div><div class="btn-label">Kalkulyator</div><div class="btn-sub">Risk hisob</div></button>
+      <button class="grid-btn btn-red" onclick="goPage('referral')"><div class="btn-icon">👥</div><div class="btn-label">Referral</div><div class="btn-sub">Do'st taklif</div></button>
     </div>
   </div>
 </div>
 
-<!-- ═══ PREMIUM PAGE ═══ -->
+<!-- ANALYZE -->
+<div class="page" id="page-analyze">
+  <div class="section" style="padding-top:14px"><div class="section-title">Grafik Tahlil</div></div>
+
+  <div class="upload-area" onclick="document.getElementById('fileInput').click()">
+    <div class="upload-icon">📊</div>
+    <div class="upload-title">Grafik yuklang</div>
+    <div class="upload-sub">TradingView, Binance, MetaTrader...</div>
+  </div>
+  <input type="file" id="fileInput" accept="image/*" onchange="analyzeImage(this)">
+
+  <div class="analysis-result" id="analysisResult">
+    <div class="result-header">
+      <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA0MDAgNDAwIiB3aWR0aD0iNDAwIiBoZWlnaHQ9IjQwMCI+CiAgPGRlZnM+CiAgICA8bGluZWFyR3JhZGllbnQgaWQ9ImJnIiB4MT0iMCUiIHkxPSIwJSIgeDI9IjEwMCUiIHkyPSIxMDAlIj4KICAgICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3R5bGU9InN0b3AtY29sb3I6IzBiMGYxZSIvPgogICAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0eWxlPSJzdG9wLWNvbG9yOiMxMTE4MjciLz4KICAgIDwvbGluZWFyR3JhZGllbnQ+CiAgICA8bGluZWFyR3JhZGllbnQgaWQ9ImdvbGQiIHgxPSIwJSIgeTE9IjAlIiB4Mj0iMTAwJSIgeTI9IjEwMCUiPgogICAgICA8c3RvcCBvZmZzZXQ9IjAlIiBzdHlsZT0ic3RvcC1jb2xvcjojRkZENzAwIi8+CiAgICAgIDxzdG9wIG9mZnNldD0iNTAlIiBzdHlsZT0ic3RvcC1jb2xvcjojRkZBNTAwIi8+CiAgICAgIDxzdG9wIG9mZnNldD0iMTAwJSIgc3R5bGU9InN0b3AtY29sb3I6I0ZGOEMwMCIvPgogICAgPC9saW5lYXJHcmFkaWVudD4KICAgIDxsaW5lYXJHcmFkaWVudCBpZD0iZ3JlZW4iIHgxPSIwJSIgeTE9IjAlIiB4Mj0iMTAwJSIgeTI9IjAlIj4KICAgICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3R5bGU9InN0b3AtY29sb3I6IzAwZjVhMCIvPgogICAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0eWxlPSJzdG9wLWNvbG9yOiMwMGQ5ZjUiLz4KICAgIDwvbGluZWFyR3JhZGllbnQ+CiAgICA8bGluZWFyR3JhZGllbnQgaWQ9InJlZCIgeDE9IjAlIiB5MT0iMCUiIHgyPSIxMDAlIiB5Mj0iMCUiPgogICAgICA8c3RvcCBvZmZzZXQ9IjAlIiBzdHlsZT0ic3RvcC1jb2xvcjojZmY0MTZjIi8+CiAgICAgIDxzdG9wIG9mZnNldD0iMTAwJSIgc3R5bGU9InN0b3AtY29sb3I6I2ZmNGIyYiIvPgogICAgPC9saW5lYXJHcmFkaWVudD4KICAgIDxsaW5lYXJHcmFkaWVudCBpZD0iYXJlYUdyYWQiIHgxPSIwJSIgeTE9IjAlIiB4Mj0iMCUiIHkyPSIxMDAlIj4KICAgICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3R5bGU9InN0b3AtY29sb3I6IzAwZjVhMDtzdG9wLW9wYWNpdHk6MC4yNSIvPgogICAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0eWxlPSJzdG9wLWNvbG9yOiMwMGY1YTA7c3RvcC1vcGFjaXR5OjAiLz4KICAgIDwvbGluZWFyR3JhZGllbnQ+CiAgICA8ZmlsdGVyIGlkPSJnbG93IiB4PSItMjAlIiB5PSItMjAlIiB3aWR0aD0iMTQwJSIgaGVpZ2h0PSIxNDAlIj4KICAgICAgPGZlR2F1c3NpYW5CbHVyIHN0ZERldmlhdGlvbj0iMi41IiByZXN1bHQ9ImJsdXIiLz4KICAgICAgPGZlTWVyZ2U+PGZlTWVyZ2VOb2RlIGluPSJibHVyIi8+PGZlTWVyZ2VOb2RlIGluPSJTb3VyY2VHcmFwaGljIi8+PC9mZU1lcmdlPgogICAgPC9maWx0ZXI+CiAgICA8ZmlsdGVyIGlkPSJiaWdnbG93IiB4PSItNDAlIiB5PSItNDAlIiB3aWR0aD0iMTgwJSIgaGVpZ2h0PSIxODAlIj4KICAgICAgPGZlR2F1c3NpYW5CbHVyIHN0ZERldmlhdGlvbj0iNiIgcmVzdWx0PSJibHVyIi8+CiAgICAgIDxmZU1lcmdlPjxmZU1lcmdlTm9kZSBpbj0iYmx1ciIvPjxmZU1lcmdlTm9kZSBpbj0iU291cmNlR3JhcGhpYyIvPjwvZmVNZXJnZT4KICAgIDwvZmlsdGVyPgogICAgPGNsaXBQYXRoIGlkPSJjYyI+PGNpcmNsZSBjeD0iMjAwIiBjeT0iMjAwIiByPSIxODgiLz48L2NsaXBQYXRoPgogIDwvZGVmcz4KCiAgPCEtLSBPdXRlciByaW5nIC0tPgogIDxjaXJjbGUgY3g9IjIwMCIgY3k9IjIwMCIgcj0iMTk2IiBmaWxsPSIjMWEyMjM1Ii8+CiAgPGNpcmNsZSBjeD0iMjAwIiBjeT0iMjAwIiByPSIxOTIiIGZpbGw9InVybCgjYmcpIi8+CgogIDwhLS0gU3VidGxlIGFyYyBkZWNvcmF0aW9uIHRvcCAtLT4KICA8cGF0aCBkPSJNIDYwLDIwMCBBIDE0MCwxNDAgMCAwLDEgMzQwLDIwMCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJ1cmwoI2dvbGQpIiBzdHJva2Utd2lkdGg9IjEiIG9wYWNpdHk9IjAuMTUiIGNsaXAtcGF0aD0idXJsKCNjYykiLz4KCiAgPCEtLSBHcmlkIC0tPgogIDxnIGNsaXAtcGF0aD0idXJsKCNjYykiIG9wYWNpdHk9IjAuMDYiIHN0cm9rZT0iIzAwZjVhMCIgc3Ryb2tlLXdpZHRoPSIwLjgiPgogICAgPGxpbmUgeDE9IjAiIHkxPSIxMzAiIHgyPSI0MDAiIHkyPSIxMzAiLz4KICAgIDxsaW5lIHgxPSIwIiB5MT0iMTc1IiB4Mj0iNDAwIiB5Mj0iMTc1Ii8+CiAgICA8bGluZSB4MT0iMCIgeTE9IjIyMCIgeDI9IjQwMCIgeTI9IjIyMCIvPgogICAgPGxpbmUgeDE9IjAiIHkxPSIyNjUiIHgyPSI0MDAiIHkyPSIyNjUiLz4KICAgIDxsaW5lIHgxPSI5NSIgeTE9IjkwIiB4Mj0iOTUiIHkyPSIzMDAiLz4KICAgIDxsaW5lIHgxPSIxNDgiIHkxPSI5MCIgeDI9IjE0OCIgeTI9IjMwMCIvPgogICAgPGxpbmUgeDE9IjIwMSIgeTE9IjkwIiB4Mj0iMjAxIiB5Mj0iMzAwIi8+CiAgICA8bGluZSB4MT0iMjU0IiB5MT0iOTAiIHgyPSIyNTQiIHkyPSIzMDAiLz4KICAgIDxsaW5lIHgxPSIzMDciIHkxPSI5MCIgeDI9IjMwNyIgeTI9IjMwMCIvPgogIDwvZz4KCiAgPCEtLSBBcmVhIGZpbGwgdW5kZXIgY2hhcnQgLS0+CiAgPHBvbHlnb24KICAgIHBvaW50cz0iNzUsMjU1IDExNSwyMTUgMTQ4LDIzMiAxODMsMTY4IDIxOCwxODggMjUzLDEzOCAyOTUsMTUyIDI5NSwyNzUgNzUsMjc1IgogICAgZmlsbD0idXJsKCNhcmVhR3JhZCkiCiAgICBjbGlwLXBhdGg9InVybCgjY2MpIgogIC8+CgogIDwhLS0gQ2hhcnQgbGluZSAtLT4KICA8cG9seWxpbmUKICAgIHBvaW50cz0iNzUsMjU1IDExNSwyMTUgMTQ4LDIzMiAxODMsMTY4IDIxOCwxODggMjUzLDEzOCAyOTUsMTUyIgogICAgZmlsbD0ibm9uZSIgc3Ryb2tlPSJ1cmwoI2dyZWVuKSIgc3Ryb2tlLXdpZHRoPSIzLjUiCiAgICBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiCiAgICBmaWx0ZXI9InVybCgjZ2xvdykiIGNsaXAtcGF0aD0idXJsKCNjYykiCiAgLz4KCiAgPCEtLSBDYW5kbGVzdGlja3MgLS0+CiAgPCEtLSAxIHJlZCAtLT4KICA8ZyBmaWx0ZXI9InVybCgjZ2xvdykiIGNsaXAtcGF0aD0idXJsKCNjYykiPgogICAgPGxpbmUgeDE9IjEwMCIgeTE9IjIwNSIgeDI9IjEwMCIgeTI9IjIyOCIgc3Ryb2tlPSJ1cmwoI3JlZCkiIHN0cm9rZS13aWR0aD0iMS41Ii8+CiAgICA8cmVjdCB4PSI5NC41IiB5PSIyMDkiIHdpZHRoPSIxMSIgaGVpZ2h0PSIxMyIgZmlsbD0idXJsKCNyZWQpIiByeD0iMS41Ii8+CiAgPC9nPgogIDwhLS0gMiBncmVlbiAtLT4KICA8ZyBmaWx0ZXI9InVybCgjZ2xvdykiIGNsaXAtcGF0aD0idXJsKCNjYykiPgogICAgPGxpbmUgeDE9IjEzMCIgeTE9IjIyMCIgeDI9IjEzMCIgeTI9IjI0MiIgc3Ryb2tlPSJ1cmwoI2dyZWVuKSIgc3Ryb2tlLXdpZHRoPSIxLjUiLz4KICAgIDxyZWN0IHg9IjEyNC41IiB5PSIyMjIiIHdpZHRoPSIxMSIgaGVpZ2h0PSIxMyIgZmlsbD0idXJsKCNncmVlbikiIHJ4PSIxLjUiLz4KICA8L2c+CiAgPCEtLSAzIGdyZWVuIC0tPgogIDxnIGZpbHRlcj0idXJsKCNnbG93KSIgY2xpcC1wYXRoPSJ1cmwoI2NjKSI+CiAgICA8bGluZSB4MT0iMTYzIiB5MT0iMTU3IiB4Mj0iMTYzIiB5Mj0iMTgwIiBzdHJva2U9InVybCgjZ3JlZW4pIiBzdHJva2Utd2lkdGg9IjEuNSIvPgogICAgPHJlY3QgeD0iMTU3LjUiIHk9IjE2MCIgd2lkdGg9IjExIiBoZWlnaHQ9IjE0IiBmaWxsPSJ1cmwoI2dyZWVuKSIgcng9IjEuNSIvPgogIDwvZz4KICA8IS0tIDQgcmVkIC0tPgogIDxnIGZpbHRlcj0idXJsKCNnbG93KSIgY2xpcC1wYXRoPSJ1cmwoI2NjKSI+CiAgICA8bGluZSB4MT0iMTk2IiB5MT0iMTc4IiB4Mj0iMTk2IiB5Mj0iMjAwIiBzdHJva2U9InVybCgjcmVkKSIgc3Ryb2tlLXdpZHRoPSIxLjUiLz4KICAgIDxyZWN0IHg9IjE5MC41IiB5PSIxODAiIHdpZHRoPSIxMSIgaGVpZ2h0PSIxMyIgZmlsbD0idXJsKCNyZWQpIiByeD0iMS41Ii8+CiAgPC9nPgogIDwhLS0gNSBncmVlbiAtLT4KICA8ZyBmaWx0ZXI9InVybCgjZ2xvdykiIGNsaXAtcGF0aD0idXJsKCNjYykiPgogICAgPGxpbmUgeDE9IjIyOSIgeTE9IjEyOCIgeDI9IjIyOSIgeTI9IjE1MiIgc3Ryb2tlPSJ1cmwoI2dyZWVuKSIgc3Ryb2tlLXdpZHRoPSIxLjUiLz4KICAgIDxyZWN0IHg9IjIyMy41IiB5PSIxMzEiIHdpZHRoPSIxMSIgaGVpZ2h0PSIxNSIgZmlsbD0idXJsKCNncmVlbikiIHJ4PSIxLjUiLz4KICA8L2c+CiAgPCEtLSA2IGdyZWVuIC0tPgogIDxnIGZpbHRlcj0idXJsKCNnbG93KSIgY2xpcC1wYXRoPSJ1cmwoI2NjKSI+CiAgICA8bGluZSB4MT0iMjYyIiB5MT0iMTQzIiB4Mj0iMjYyIiB5Mj0iMTY1IiBzdHJva2U9InVybCgjZ3JlZW4pIiBzdHJva2Utd2lkdGg9IjEuNSIvPgogICAgPHJlY3QgeD0iMjU2LjUiIHk9IjE0NSIgd2lkdGg9IjExIiBoZWlnaHQ9IjEzIiBmaWxsPSJ1cmwoI2dyZWVuKSIgcng9IjEuNSIvPgogIDwvZz4KCiAgPCEtLSBMaXZlIGRvdCAtLT4KICA8Y2lyY2xlIGN4PSIyOTUiIGN5PSIxNTIiIHI9IjEwIiBmaWxsPSIjMDBmNWEwIiBvcGFjaXR5PSIwLjE1IiBmaWx0ZXI9InVybCgjYmlnZ2xvdykiLz4KICA8Y2lyY2xlIGN4PSIyOTUiIGN5PSIxNTIiIHI9IjUuNSIgZmlsbD0iIzAwZjVhMCIgZmlsdGVyPSJ1cmwoI2dsb3cpIi8+CiAgPGNpcmNsZSBjeD0iMjk1IiBjeT0iMTUyIiByPSIyLjUiIGZpbGw9IiNmZmZmZmYiLz4KCiAgPCEtLSBBSSBicmFpbiBpY29uIChzaW1wbGlmaWVkKSAtLT4KICA8ZyB0cmFuc2Zvcm09InRyYW5zbGF0ZSg1MiwgNTIpIiBmaWx0ZXI9InVybCgjZ2xvdykiPgogICAgPGNpcmNsZSBjeD0iMCIgY3k9IjAiIHI9IjIyIiBmaWxsPSJub25lIiBzdHJva2U9InVybCgjZ29sZCkiIHN0cm9rZS13aWR0aD0iMS41IiBvcGFjaXR5PSIwLjYiLz4KICAgIDwhLS0gYnJhaW4gc2hhcGUgc2ltcGxpZmllZCBhcyBjaXJjdWl0IG5vZGVzIC0tPgogICAgPGNpcmNsZSBjeD0iMCIgY3k9Ii04IiByPSIzIiBmaWxsPSJ1cmwoI2dvbGQpIiBvcGFjaXR5PSIwLjgiLz4KICAgIDxjaXJjbGUgY3g9IjgiIGN5PSI0IiByPSIzIiBmaWxsPSJ1cmwoI2dvbGQpIiBvcGFjaXR5PSIwLjgiLz4KICAgIDxjaXJjbGUgY3g9Ii04IiBjeT0iNCIgcj0iMyIgZmlsbD0idXJsKCNnb2xkKSIgb3BhY2l0eT0iMC44Ii8+CiAgICA8bGluZSB4MT0iMCIgeTE9Ii01IiB4Mj0iOCIgeTI9IjQiIHN0cm9rZT0idXJsKCNnb2xkKSIgc3Ryb2tlLXdpZHRoPSIxIiBvcGFjaXR5PSIwLjYiLz4KICAgIDxsaW5lIHgxPSIwIiB5MT0iLTUiIHgyPSItOCIgeTI9IjQiIHN0cm9rZT0idXJsKCNnb2xkKSIgc3Ryb2tlLXdpZHRoPSIxIiBvcGFjaXR5PSIwLjYiLz4KICAgIDxsaW5lIHgxPSI4IiB5MT0iNCIgeDI9Ii04IiB5Mj0iNCIgc3Ryb2tlPSJ1cmwoI2dvbGQpIiBzdHJva2Utd2lkdGg9IjEiIG9wYWNpdHk9IjAuNiIvPgogIDwvZz4KCiAgPCEtLSBTaWduYWwgYmFkZ2UgdG9wIHJpZ2h0IC0tPgogIDxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKDMzMCwgNzUpIj4KICAgIDxjaXJjbGUgY3g9IjAiIGN5PSIwIiByPSIyMCIgZmlsbD0iIzFhMjIzNSIgc3Ryb2tlPSJ1cmwoI2dyZWVuKSIgc3Ryb2tlLXdpZHRoPSIxLjUiLz4KICAgIDx0ZXh0IHg9IjAiIHk9IjUiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIxMSIgZm9udC13ZWlnaHQ9ImJvbGQiCiAgICAgIGZpbGw9InVybCgjZ3JlZW4pIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIj5BSTwvdGV4dD4KICA8L2c+CgogIDwhLS0gQm90dG9tIGxhYmVsIC0tPgogIDwhLS0gRGFyayBwaWxsIGJhY2tncm91bmQgLS0+CiAgPHJlY3QgeD0iODAiIHk9IjI5NiIgd2lkdGg9IjI0MCIgaGVpZ2h0PSI2NCIgcng9IjMyIiBmaWxsPSIjMGQxMzIyIiBvcGFjaXR5PSIwLjkiLz4KICA8cmVjdCB4PSI4MiIgeT0iMjk4IiB3aWR0aD0iMjM2IiBoZWlnaHQ9IjYwIiByeD0iMzAiIGZpbGw9Im5vbmUiIHN0cm9rZT0idXJsKCNnb2xkKSIgc3Ryb2tlLXdpZHRoPSIxIiBvcGFjaXR5PSIwLjQiLz4KCiAgPHRleHQgeD0iMjAwIiB5PSIzMjMiIGZvbnQtZmFtaWx5PSInQXJpYWwgQmxhY2snLCBBcmlhbCwgc2Fucy1zZXJpZiIKICAgIGZvbnQtc2l6ZT0iMjIiIGZvbnQtd2VpZ2h0PSI5MDAiIGZpbGw9InVybCgjZ29sZCkiCiAgICB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBsZXR0ZXItc3BhY2luZz0iMyIgZmlsdGVyPSJ1cmwoI2dsb3cpIj5BTkFMSVo8L3RleHQ+CiAgPHRleHQgeD0iMjAwIiB5PSIzNDUiIGZvbnQtZmFtaWx5PSJBcmlhbCwgc2Fucy1zZXJpZiIKICAgIGZvbnQtc2l6ZT0iMTEiIGZvbnQtd2VpZ2h0PSI1MDAiIGZpbGw9IiM3YThmYTgiCiAgICB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBsZXR0ZXItc3BhY2luZz0iNSI+VFJBRElORyBCT1Q8L3RleHQ+CgogIDwhLS0gT3V0ZXIgYm9yZGVyIC0tPgogIDxjaXJjbGUgY3g9IjIwMCIgY3k9IjIwMCIgcj0iMTkyIiBmaWxsPSJub25lIiBzdHJva2U9InVybCgjZ29sZCkiIHN0cm9rZS13aWR0aD0iMS41IiBvcGFjaXR5PSIwLjMiLz4KICA8Y2lyY2xlIGN4PSIyMDAiIGN5PSIyMDAiIHI9IjE4OCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJ1cmwoI2dyZWVuKSIgc3Ryb2tlLXdpZHRoPSIwLjUiIG9wYWNpdHk9IjAuMiIvPgo8L3N2Zz4K" alt="logo" onerror="this.style.display='none'">
+      <span>Forex Analiz Bot</span>
+    </div>
+    <div class="result-text" id="resultText"></div>
+  </div>
+</div>
+
+<!-- PREMIUM -->
 <div class="page" id="page-premium">
   <div class="premium-hero">
-    <div class="premium-icon">💎</div>
+    <div class="p-icon">💎</div>
     <h2>Premium Obuna</h2>
     <p>Cheksiz tahlil va kengaytirilgan imkoniyatlar</p>
   </div>
@@ -451,269 +284,251 @@
     <div class="feature-item"><div class="f-icon">⚡</div><div class="f-text">Tez javob — 5 soniya</div></div>
     <div class="feature-item"><div class="f-icon">📊</div><div class="f-text">Batafsil tahlil + SL/TP</div></div>
     <div class="feature-item"><div class="f-icon">🌐</div><div class="f-text">O'zbek, Rus, Ingliz</div></div>
-    <div class="feature-item"><div class="f-icon">📢</div><div class="f-text">Kanal signallari</div></div>
   </div>
-  <div class="pay-section">
-    <div class="pay-title">TO'LOV USULINI TANLANG</div>
-    <div class="pay-options">
-      <button class="pay-btn pay-stars" onclick="payStars()">
-        <div class="p-icon">⭐</div>
-        <div class="p-info"><div class="p-name">Telegram Stars</div><div class="p-price">299 Stars / oy</div></div>
-        <div class="p-arrow">›</div>
-      </button>
-      <button class="pay-btn pay-ton" onclick="payTon()">
-        <div class="p-icon">💎</div>
-        <div class="p-info"><div class="p-name">TON</div><div class="p-price" id="tonPrice">5 TON / oy</div></div>
-        <div class="p-arrow">›</div>
-      </button>
-      <button class="pay-btn pay-card" onclick="payCard()">
-        <div class="p-icon">💳</div>
-        <div class="p-info"><div class="p-name">Visa / Uzcard</div><div class="p-price" id="cardPrice">50,000 so'm / oy</div></div>
-        <div class="p-arrow">›</div>
-      </button>
-    </div>
+  <div class="pay-options">
+    <div style="font-size:11px;color:var(--text-dim);font-weight:700;text-align:center;margin-bottom:4px">TO'LOV USULINI TANLANG</div>
+    <button class="pay-btn pay-stars" onclick="payStars()">
+      <div class="p-icon">⭐</div>
+      <div><div class="p-name">Telegram Stars</div><div class="p-price" id="starsPrice">299 Stars / oy</div></div>
+      <div class="p-arrow">›</div>
+    </button>
+    <button class="pay-btn pay-ton" onclick="payTon()">
+      <div class="p-icon">💎</div>
+      <div><div class="p-name">TON</div><div class="p-price" id="tonPrice">5 TON / oy</div></div>
+      <div class="p-arrow">›</div>
+    </button>
+    <button class="pay-btn pay-card" onclick="payCard()">
+      <div class="p-icon">💳</div>
+      <div><div class="p-name">Visa / Uzcard</div><div class="p-price" id="cardPrice">50,000 so'm / oy</div></div>
+      <div class="p-arrow">›</div>
+    </button>
   </div>
 </div>
 
-<!-- ═══ CALCULATOR PAGE ═══ -->
+<!-- CALCULATOR -->
 <div class="page" id="page-calc">
-  <div class="section" style="padding-top:16px">
-    <div class="section-title">Risk Kalkulyator</div>
-  </div>
+  <div class="section" style="padding-top:14px"><div class="section-title">Risk Kalkulyator</div></div>
   <div class="calc-form">
-    <div class="input-group">
-      <label>HISOB HAJMI ($)</label>
-      <input type="number" id="balance" placeholder="Masalan: 1000" inputmode="decimal">
-    </div>
-    <div class="input-group">
-      <label>RISK % (1-5%)</label>
-      <input type="number" id="riskPct" placeholder="Masalan: 2" inputmode="decimal">
-    </div>
-    <div class="input-group">
-      <label>KIRISH NARXI</label>
-      <input type="number" id="entry" placeholder="Masalan: 2650.00" inputmode="decimal">
-    </div>
-    <div class="input-group">
-      <label>STOP LOSS NARXI</label>
-      <input type="number" id="sl" placeholder="Masalan: 2640.00" inputmode="decimal">
-    </div>
+    <div class="input-group"><label>HISOB ($)</label><input type="number" id="balance" placeholder="1000" inputmode="decimal"></div>
+    <div class="input-group"><label>RISK %</label><input type="number" id="riskPct" placeholder="2" inputmode="decimal"></div>
+    <div class="input-group"><label>KIRISH NARXI</label><input type="number" id="entry" placeholder="2650.00" inputmode="decimal"></div>
+    <div class="input-group"><label>STOP LOSS</label><input type="number" id="sl" placeholder="2640.00" inputmode="decimal"></div>
     <button class="calc-btn" onclick="calculate()">⚡ Hisoblash</button>
-
     <div class="calc-result" id="calcResult">
-      <div class="result-row"><div class="r-label">📍 Yo'nalish</div><div class="r-val" id="rDir">—</div></div>
-      <div class="result-row"><div class="r-label">💰 Risk summasi</div><div class="r-val r-red" id="rRisk">—</div></div>
-      <div class="result-row"><div class="r-label">📏 SL masofa</div><div class="r-val" id="rSLDist">—</div></div>
-      <div class="result-row"><div class="r-label">🎯 TP 1:1</div><div class="r-val r-green" id="rTP1">—</div></div>
-      <div class="result-row"><div class="r-label">🎯 TP 1:2</div><div class="r-val r-green" id="rTP2">—</div></div>
-      <div class="result-row"><div class="r-label">🎯 TP 1:3</div><div class="r-val r-gold" id="rTP3">—</div></div>
+      <div class="result-row"><div class="r-label">Yo'nalish</div><div class="r-val" id="rDir">—</div></div>
+      <div class="result-row"><div class="r-label">Risk summasi</div><div class="r-val r-red" id="rRisk">—</div></div>
+      <div class="result-row"><div class="r-label">SL masofa</div><div class="r-val" id="rSLDist">—</div></div>
+      <div class="result-row"><div class="r-label">TP 1:1</div><div class="r-val r-green" id="rTP1">—</div></div>
+      <div class="result-row"><div class="r-label">TP 1:2</div><div class="r-val r-green" id="rTP2">—</div></div>
+      <div class="result-row"><div class="r-label">TP 1:3</div><div class="r-val r-gold" id="rTP3">—</div></div>
     </div>
   </div>
 </div>
 
-<!-- ═══ HISTORY PAGE ═══ -->
-<div class="page" id="page-history">
-  <div class="section" style="padding-top:16px">
-    <div class="section-title">Tahlil Tarixi</div>
-  </div>
-  <div class="history-list" id="historyList">
-    <div class="loader"><div class="dot"></div><div class="dot"></div><div class="dot"></div></div>
-  </div>
-</div>
-
-<!-- ═══ REFERRAL PAGE ═══ -->
+<!-- REFERRAL -->
 <div class="page" id="page-referral">
   <div class="referral-card">
     <div class="ref-icon">👥</div>
     <div class="ref-title">Do'st Taklif Qil</div>
-    <div class="ref-sub">Har bir do'stingiz uchun <strong style="color:var(--green)">1 ta bepul tahlil</strong> oling!</div>
-    <div class="ref-code" id="refCode">LOADING...</div>
-    <button class="ref-share" onclick="shareRef()">📤 Do'stlarga Ulashish</button>
+    <div class="ref-sub">Har bir do'stingiz uchun <strong style="color:var(--green)">1 ta bepul tahlil</strong>!</div>
+    <div class="ref-code" id="refCode">REF000000</div>
+    <button class="ref-share" onclick="shareRef()">📤 Ulashish</button>
     <div class="ref-stats">
-      <div class="ref-stat"><div class="rs-num" id="refCount">0</div><div class="rs-label">Taklif qilingan</div></div>
-      <div class="ref-stat"><div class="rs-num" id="refBonus">0</div><div class="rs-label">Bonus tahlillar</div></div>
+      <div class="ref-stat"><div class="rs-num" id="refCount">0</div><div class="rs-label">Taklif</div></div>
+      <div class="ref-stat"><div class="rs-num" id="refBonus">0</div><div class="rs-label">Bonus</div></div>
     </div>
   </div>
 </div>
 
-<!-- Bottom Nav -->
+
+<!-- PROFILE -->
+<div class="page" id="page-profile">
+  <div class="hero">
+    <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA0MDAgNDAwIiB3aWR0aD0iNDAwIiBoZWlnaHQ9IjQwMCI+CiAgPGRlZnM+CiAgICA8bGluZWFyR3JhZGllbnQgaWQ9ImJnIiB4MT0iMCUiIHkxPSIwJSIgeDI9IjEwMCUiIHkyPSIxMDAlIj4KICAgICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3R5bGU9InN0b3AtY29sb3I6IzBiMGYxZSIvPgogICAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0eWxlPSJzdG9wLWNvbG9yOiMxMTE4MjciLz4KICAgIDwvbGluZWFyR3JhZGllbnQ+CiAgICA8bGluZWFyR3JhZGllbnQgaWQ9ImdvbGQiIHgxPSIwJSIgeTE9IjAlIiB4Mj0iMTAwJSIgeTI9IjEwMCUiPgogICAgICA8c3RvcCBvZmZzZXQ9IjAlIiBzdHlsZT0ic3RvcC1jb2xvcjojRkZENzAwIi8+CiAgICAgIDxzdG9wIG9mZnNldD0iNTAlIiBzdHlsZT0ic3RvcC1jb2xvcjojRkZBNTAwIi8+CiAgICAgIDxzdG9wIG9mZnNldD0iMTAwJSIgc3R5bGU9InN0b3AtY29sb3I6I0ZGOEMwMCIvPgogICAgPC9saW5lYXJHcmFkaWVudD4KICAgIDxsaW5lYXJHcmFkaWVudCBpZD0iZ3JlZW4iIHgxPSIwJSIgeTE9IjAlIiB4Mj0iMTAwJSIgeTI9IjAlIj4KICAgICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3R5bGU9InN0b3AtY29sb3I6IzAwZjVhMCIvPgogICAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0eWxlPSJzdG9wLWNvbG9yOiMwMGQ5ZjUiLz4KICAgIDwvbGluZWFyR3JhZGllbnQ+CiAgICA8bGluZWFyR3JhZGllbnQgaWQ9InJlZCIgeDE9IjAlIiB5MT0iMCUiIHgyPSIxMDAlIiB5Mj0iMCUiPgogICAgICA8c3RvcCBvZmZzZXQ9IjAlIiBzdHlsZT0ic3RvcC1jb2xvcjojZmY0MTZjIi8+CiAgICAgIDxzdG9wIG9mZnNldD0iMTAwJSIgc3R5bGU9InN0b3AtY29sb3I6I2ZmNGIyYiIvPgogICAgPC9saW5lYXJHcmFkaWVudD4KICAgIDxsaW5lYXJHcmFkaWVudCBpZD0iYXJlYUdyYWQiIHgxPSIwJSIgeTE9IjAlIiB4Mj0iMCUiIHkyPSIxMDAlIj4KICAgICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3R5bGU9InN0b3AtY29sb3I6IzAwZjVhMDtzdG9wLW9wYWNpdHk6MC4yNSIvPgogICAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0eWxlPSJzdG9wLWNvbG9yOiMwMGY1YTA7c3RvcC1vcGFjaXR5OjAiLz4KICAgIDwvbGluZWFyR3JhZGllbnQ+CiAgICA8ZmlsdGVyIGlkPSJnbG93IiB4PSItMjAlIiB5PSItMjAlIiB3aWR0aD0iMTQwJSIgaGVpZ2h0PSIxNDAlIj4KICAgICAgPGZlR2F1c3NpYW5CbHVyIHN0ZERldmlhdGlvbj0iMi41IiByZXN1bHQ9ImJsdXIiLz4KICAgICAgPGZlTWVyZ2U+PGZlTWVyZ2VOb2RlIGluPSJibHVyIi8+PGZlTWVyZ2VOb2RlIGluPSJTb3VyY2VHcmFwaGljIi8+PC9mZU1lcmdlPgogICAgPC9maWx0ZXI+CiAgICA8ZmlsdGVyIGlkPSJiaWdnbG93IiB4PSItNDAlIiB5PSItNDAlIiB3aWR0aD0iMTgwJSIgaGVpZ2h0PSIxODAlIj4KICAgICAgPGZlR2F1c3NpYW5CbHVyIHN0ZERldmlhdGlvbj0iNiIgcmVzdWx0PSJibHVyIi8+CiAgICAgIDxmZU1lcmdlPjxmZU1lcmdlTm9kZSBpbj0iYmx1ciIvPjxmZU1lcmdlTm9kZSBpbj0iU291cmNlR3JhcGhpYyIvPjwvZmVNZXJnZT4KICAgIDwvZmlsdGVyPgogICAgPGNsaXBQYXRoIGlkPSJjYyI+PGNpcmNsZSBjeD0iMjAwIiBjeT0iMjAwIiByPSIxODgiLz48L2NsaXBQYXRoPgogIDwvZGVmcz4KCiAgPCEtLSBPdXRlciByaW5nIC0tPgogIDxjaXJjbGUgY3g9IjIwMCIgY3k9IjIwMCIgcj0iMTk2IiBmaWxsPSIjMWEyMjM1Ii8+CiAgPGNpcmNsZSBjeD0iMjAwIiBjeT0iMjAwIiByPSIxOTIiIGZpbGw9InVybCgjYmcpIi8+CgogIDwhLS0gU3VidGxlIGFyYyBkZWNvcmF0aW9uIHRvcCAtLT4KICA8cGF0aCBkPSJNIDYwLDIwMCBBIDE0MCwxNDAgMCAwLDEgMzQwLDIwMCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJ1cmwoI2dvbGQpIiBzdHJva2Utd2lkdGg9IjEiIG9wYWNpdHk9IjAuMTUiIGNsaXAtcGF0aD0idXJsKCNjYykiLz4KCiAgPCEtLSBHcmlkIC0tPgogIDxnIGNsaXAtcGF0aD0idXJsKCNjYykiIG9wYWNpdHk9IjAuMDYiIHN0cm9rZT0iIzAwZjVhMCIgc3Ryb2tlLXdpZHRoPSIwLjgiPgogICAgPGxpbmUgeDE9IjAiIHkxPSIxMzAiIHgyPSI0MDAiIHkyPSIxMzAiLz4KICAgIDxsaW5lIHgxPSIwIiB5MT0iMTc1IiB4Mj0iNDAwIiB5Mj0iMTc1Ii8+CiAgICA8bGluZSB4MT0iMCIgeTE9IjIyMCIgeDI9IjQwMCIgeTI9IjIyMCIvPgogICAgPGxpbmUgeDE9IjAiIHkxPSIyNjUiIHgyPSI0MDAiIHkyPSIyNjUiLz4KICAgIDxsaW5lIHgxPSI5NSIgeTE9IjkwIiB4Mj0iOTUiIHkyPSIzMDAiLz4KICAgIDxsaW5lIHgxPSIxNDgiIHkxPSI5MCIgeDI9IjE0OCIgeTI9IjMwMCIvPgogICAgPGxpbmUgeDE9IjIwMSIgeTE9IjkwIiB4Mj0iMjAxIiB5Mj0iMzAwIi8+CiAgICA8bGluZSB4MT0iMjU0IiB5MT0iOTAiIHgyPSIyNTQiIHkyPSIzMDAiLz4KICAgIDxsaW5lIHgxPSIzMDciIHkxPSI5MCIgeDI9IjMwNyIgeTI9IjMwMCIvPgogIDwvZz4KCiAgPCEtLSBBcmVhIGZpbGwgdW5kZXIgY2hhcnQgLS0+CiAgPHBvbHlnb24KICAgIHBvaW50cz0iNzUsMjU1IDExNSwyMTUgMTQ4LDIzMiAxODMsMTY4IDIxOCwxODggMjUzLDEzOCAyOTUsMTUyIDI5NSwyNzUgNzUsMjc1IgogICAgZmlsbD0idXJsKCNhcmVhR3JhZCkiCiAgICBjbGlwLXBhdGg9InVybCgjY2MpIgogIC8+CgogIDwhLS0gQ2hhcnQgbGluZSAtLT4KICA8cG9seWxpbmUKICAgIHBvaW50cz0iNzUsMjU1IDExNSwyMTUgMTQ4LDIzMiAxODMsMTY4IDIxOCwxODggMjUzLDEzOCAyOTUsMTUyIgogICAgZmlsbD0ibm9uZSIgc3Ryb2tlPSJ1cmwoI2dyZWVuKSIgc3Ryb2tlLXdpZHRoPSIzLjUiCiAgICBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiCiAgICBmaWx0ZXI9InVybCgjZ2xvdykiIGNsaXAtcGF0aD0idXJsKCNjYykiCiAgLz4KCiAgPCEtLSBDYW5kbGVzdGlja3MgLS0+CiAgPCEtLSAxIHJlZCAtLT4KICA8ZyBmaWx0ZXI9InVybCgjZ2xvdykiIGNsaXAtcGF0aD0idXJsKCNjYykiPgogICAgPGxpbmUgeDE9IjEwMCIgeTE9IjIwNSIgeDI9IjEwMCIgeTI9IjIyOCIgc3Ryb2tlPSJ1cmwoI3JlZCkiIHN0cm9rZS13aWR0aD0iMS41Ii8+CiAgICA8cmVjdCB4PSI5NC41IiB5PSIyMDkiIHdpZHRoPSIxMSIgaGVpZ2h0PSIxMyIgZmlsbD0idXJsKCNyZWQpIiByeD0iMS41Ii8+CiAgPC9nPgogIDwhLS0gMiBncmVlbiAtLT4KICA8ZyBmaWx0ZXI9InVybCgjZ2xvdykiIGNsaXAtcGF0aD0idXJsKCNjYykiPgogICAgPGxpbmUgeDE9IjEzMCIgeTE9IjIyMCIgeDI9IjEzMCIgeTI9IjI0MiIgc3Ryb2tlPSJ1cmwoI2dyZWVuKSIgc3Ryb2tlLXdpZHRoPSIxLjUiLz4KICAgIDxyZWN0IHg9IjEyNC41IiB5PSIyMjIiIHdpZHRoPSIxMSIgaGVpZ2h0PSIxMyIgZmlsbD0idXJsKCNncmVlbikiIHJ4PSIxLjUiLz4KICA8L2c+CiAgPCEtLSAzIGdyZWVuIC0tPgogIDxnIGZpbHRlcj0idXJsKCNnbG93KSIgY2xpcC1wYXRoPSJ1cmwoI2NjKSI+CiAgICA8bGluZSB4MT0iMTYzIiB5MT0iMTU3IiB4Mj0iMTYzIiB5Mj0iMTgwIiBzdHJva2U9InVybCgjZ3JlZW4pIiBzdHJva2Utd2lkdGg9IjEuNSIvPgogICAgPHJlY3QgeD0iMTU3LjUiIHk9IjE2MCIgd2lkdGg9IjExIiBoZWlnaHQ9IjE0IiBmaWxsPSJ1cmwoI2dyZWVuKSIgcng9IjEuNSIvPgogIDwvZz4KICA8IS0tIDQgcmVkIC0tPgogIDxnIGZpbHRlcj0idXJsKCNnbG93KSIgY2xpcC1wYXRoPSJ1cmwoI2NjKSI+CiAgICA8bGluZSB4MT0iMTk2IiB5MT0iMTc4IiB4Mj0iMTk2IiB5Mj0iMjAwIiBzdHJva2U9InVybCgjcmVkKSIgc3Ryb2tlLXdpZHRoPSIxLjUiLz4KICAgIDxyZWN0IHg9IjE5MC41IiB5PSIxODAiIHdpZHRoPSIxMSIgaGVpZ2h0PSIxMyIgZmlsbD0idXJsKCNyZWQpIiByeD0iMS41Ii8+CiAgPC9nPgogIDwhLS0gNSBncmVlbiAtLT4KICA8ZyBmaWx0ZXI9InVybCgjZ2xvdykiIGNsaXAtcGF0aD0idXJsKCNjYykiPgogICAgPGxpbmUgeDE9IjIyOSIgeTE9IjEyOCIgeDI9IjIyOSIgeTI9IjE1MiIgc3Ryb2tlPSJ1cmwoI2dyZWVuKSIgc3Ryb2tlLXdpZHRoPSIxLjUiLz4KICAgIDxyZWN0IHg9IjIyMy41IiB5PSIxMzEiIHdpZHRoPSIxMSIgaGVpZ2h0PSIxNSIgZmlsbD0idXJsKCNncmVlbikiIHJ4PSIxLjUiLz4KICA8L2c+CiAgPCEtLSA2IGdyZWVuIC0tPgogIDxnIGZpbHRlcj0idXJsKCNnbG93KSIgY2xpcC1wYXRoPSJ1cmwoI2NjKSI+CiAgICA8bGluZSB4MT0iMjYyIiB5MT0iMTQzIiB4Mj0iMjYyIiB5Mj0iMTY1IiBzdHJva2U9InVybCgjZ3JlZW4pIiBzdHJva2Utd2lkdGg9IjEuNSIvPgogICAgPHJlY3QgeD0iMjU2LjUiIHk9IjE0NSIgd2lkdGg9IjExIiBoZWlnaHQ9IjEzIiBmaWxsPSJ1cmwoI2dyZWVuKSIgcng9IjEuNSIvPgogIDwvZz4KCiAgPCEtLSBMaXZlIGRvdCAtLT4KICA8Y2lyY2xlIGN4PSIyOTUiIGN5PSIxNTIiIHI9IjEwIiBmaWxsPSIjMDBmNWEwIiBvcGFjaXR5PSIwLjE1IiBmaWx0ZXI9InVybCgjYmlnZ2xvdykiLz4KICA8Y2lyY2xlIGN4PSIyOTUiIGN5PSIxNTIiIHI9IjUuNSIgZmlsbD0iIzAwZjVhMCIgZmlsdGVyPSJ1cmwoI2dsb3cpIi8+CiAgPGNpcmNsZSBjeD0iMjk1IiBjeT0iMTUyIiByPSIyLjUiIGZpbGw9IiNmZmZmZmYiLz4KCiAgPCEtLSBBSSBicmFpbiBpY29uIChzaW1wbGlmaWVkKSAtLT4KICA8ZyB0cmFuc2Zvcm09InRyYW5zbGF0ZSg1MiwgNTIpIiBmaWx0ZXI9InVybCgjZ2xvdykiPgogICAgPGNpcmNsZSBjeD0iMCIgY3k9IjAiIHI9IjIyIiBmaWxsPSJub25lIiBzdHJva2U9InVybCgjZ29sZCkiIHN0cm9rZS13aWR0aD0iMS41IiBvcGFjaXR5PSIwLjYiLz4KICAgIDwhLS0gYnJhaW4gc2hhcGUgc2ltcGxpZmllZCBhcyBjaXJjdWl0IG5vZGVzIC0tPgogICAgPGNpcmNsZSBjeD0iMCIgY3k9Ii04IiByPSIzIiBmaWxsPSJ1cmwoI2dvbGQpIiBvcGFjaXR5PSIwLjgiLz4KICAgIDxjaXJjbGUgY3g9IjgiIGN5PSI0IiByPSIzIiBmaWxsPSJ1cmwoI2dvbGQpIiBvcGFjaXR5PSIwLjgiLz4KICAgIDxjaXJjbGUgY3g9Ii04IiBjeT0iNCIgcj0iMyIgZmlsbD0idXJsKCNnb2xkKSIgb3BhY2l0eT0iMC44Ii8+CiAgICA8bGluZSB4MT0iMCIgeTE9Ii01IiB4Mj0iOCIgeTI9IjQiIHN0cm9rZT0idXJsKCNnb2xkKSIgc3Ryb2tlLXdpZHRoPSIxIiBvcGFjaXR5PSIwLjYiLz4KICAgIDxsaW5lIHgxPSIwIiB5MT0iLTUiIHgyPSItOCIgeTI9IjQiIHN0cm9rZT0idXJsKCNnb2xkKSIgc3Ryb2tlLXdpZHRoPSIxIiBvcGFjaXR5PSIwLjYiLz4KICAgIDxsaW5lIHgxPSI4IiB5MT0iNCIgeDI9Ii04IiB5Mj0iNCIgc3Ryb2tlPSJ1cmwoI2dvbGQpIiBzdHJva2Utd2lkdGg9IjEiIG9wYWNpdHk9IjAuNiIvPgogIDwvZz4KCiAgPCEtLSBTaWduYWwgYmFkZ2UgdG9wIHJpZ2h0IC0tPgogIDxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKDMzMCwgNzUpIj4KICAgIDxjaXJjbGUgY3g9IjAiIGN5PSIwIiByPSIyMCIgZmlsbD0iIzFhMjIzNSIgc3Ryb2tlPSJ1cmwoI2dyZWVuKSIgc3Ryb2tlLXdpZHRoPSIxLjUiLz4KICAgIDx0ZXh0IHg9IjAiIHk9IjUiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIxMSIgZm9udC13ZWlnaHQ9ImJvbGQiCiAgICAgIGZpbGw9InVybCgjZ3JlZW4pIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIj5BSTwvdGV4dD4KICA8L2c+CgogIDwhLS0gQm90dG9tIGxhYmVsIC0tPgogIDwhLS0gRGFyayBwaWxsIGJhY2tncm91bmQgLS0+CiAgPHJlY3QgeD0iODAiIHk9IjI5NiIgd2lkdGg9IjI0MCIgaGVpZ2h0PSI2NCIgcng9IjMyIiBmaWxsPSIjMGQxMzIyIiBvcGFjaXR5PSIwLjkiLz4KICA8cmVjdCB4PSI4MiIgeT0iMjk4IiB3aWR0aD0iMjM2IiBoZWlnaHQ9IjYwIiByeD0iMzAiIGZpbGw9Im5vbmUiIHN0cm9rZT0idXJsKCNnb2xkKSIgc3Ryb2tlLXdpZHRoPSIxIiBvcGFjaXR5PSIwLjQiLz4KCiAgPHRleHQgeD0iMjAwIiB5PSIzMjMiIGZvbnQtZmFtaWx5PSInQXJpYWwgQmxhY2snLCBBcmlhbCwgc2Fucy1zZXJpZiIKICAgIGZvbnQtc2l6ZT0iMjIiIGZvbnQtd2VpZ2h0PSI5MDAiIGZpbGw9InVybCgjZ29sZCkiCiAgICB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBsZXR0ZXItc3BhY2luZz0iMyIgZmlsdGVyPSJ1cmwoI2dsb3cpIj5BTkFMSVo8L3RleHQ+CiAgPHRleHQgeD0iMjAwIiB5PSIzNDUiIGZvbnQtZmFtaWx5PSJBcmlhbCwgc2Fucy1zZXJpZiIKICAgIGZvbnQtc2l6ZT0iMTEiIGZvbnQtd2VpZ2h0PSI1MDAiIGZpbGw9IiM3YThmYTgiCiAgICB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBsZXR0ZXItc3BhY2luZz0iNSI+VFJBRElORyBCT1Q8L3RleHQ+CgogIDwhLS0gT3V0ZXIgYm9yZGVyIC0tPgogIDxjaXJjbGUgY3g9IjIwMCIgY3k9IjIwMCIgcj0iMTkyIiBmaWxsPSJub25lIiBzdHJva2U9InVybCgjZ29sZCkiIHN0cm9rZS13aWR0aD0iMS41IiBvcGFjaXR5PSIwLjMiLz4KICA8Y2lyY2xlIGN4PSIyMDAiIGN5PSIyMDAiIHI9IjE4OCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJ1cmwoI2dyZWVuKSIgc3Ryb2tlLXdpZHRoPSIwLjUiIG9wYWNpdHk9IjAuMiIvPgo8L3N2Zz4K" alt="logo">
+    <h2 id="profileName">Trader</h2>
+    <p id="profileUsername">@username</p>
+  </div>
+  <div class="feature-list">
+    <div class="feature-item"><div class="f-icon">📅</div><div class="f-text" id="profileJoined">Ro'yxatdan o'tgan: —</div></div>
+    <div class="feature-item"><div class="f-icon">📊</div><div class="f-text" id="profileAnalyses">Tahlillar: 0 ta</div></div>
+    <div class="feature-item"><div class="f-icon">👥</div><div class="f-text" id="profileReferrals">Taklif qilinganlar: 0 ta</div></div>
+    <div class="feature-item"><div class="f-icon">🎁</div><div class="f-text" id="profileBonus">Bonus tahlillar: 0 ta</div></div>
+    <div class="feature-item" id="profilePremiumItem"><div class="f-icon">💎</div><div class="f-text" id="profilePremium">Premium: ❌ Yo'q</div></div>
+    <div class="feature-item" id="profileFreeItem"><div class="f-icon">🎫</div><div class="f-text" id="profileFree">Bepul tahlillar: 7 ta qolgan</div></div>
+  </div>
+  <div style="padding:14px 16px 0">
+    <button class="calc-btn" onclick="goPage('premium')" style="background:linear-gradient(135deg,#f5c842,#ff8c00);color:#000">💎 Premium sotib olish</button>
+  </div>
+</div>
+
+<!-- BOTTOM NAV -->
 <div class="bottom-nav">
-  <div class="nav-item active" onclick="goPage('home')" id="nav-home">
-    <div class="nav-icon">🏠</div>
-    <div class="nav-label">Bosh sahifa</div>
-  </div>
-  <div class="nav-item" onclick="goPage('premium')" id="nav-premium">
-    <div class="nav-icon">💎</div>
-    <div class="nav-label">Premium</div>
-  </div>
-  <div class="nav-item" onclick="goPage('calc')" id="nav-calc">
-    <div class="nav-icon">🧮</div>
-    <div class="nav-label">Kalkulyator</div>
-  </div>
-  <div class="nav-item" onclick="goPage('history')" id="nav-history">
-    <div class="nav-icon">📜</div>
-    <div class="nav-label">Tarix</div>
-  </div>
-  <div class="nav-item" onclick="goPage('referral')" id="nav-referral">
-    <div class="nav-icon">👥</div>
-    <div class="nav-label">Referral</div>
-  </div>
+  <div class="nav-item active" onclick="goPage('home')" id="nav-home"><div class="nav-icon">🏠</div><div class="nav-label">Bosh</div></div>
+  <div class="nav-item" onclick="goPage('analyze')" id="nav-analyze"><div class="nav-icon">📸</div><div class="nav-label">Tahlil</div></div>
+  <div class="nav-item" onclick="goPage('premium')" id="nav-premium"><div class="nav-icon">💎</div><div class="nav-label">Premium</div></div>
+  <div class="nav-item" onclick="goPage('calc')" id="nav-calc"><div class="nav-icon">🧮</div><div class="nav-label">Kalk</div></div>
+  <div class="nav-item" onclick="goPage('referral')" id="nav-referral"><div class="nav-icon">👥</div><div class="nav-label">Referral</div></div>
+  <div class="nav-item" onclick="goPage('profile')" id="nav-profile"><div class="nav-icon">👤</div><div class="nav-label">Profil</div></div>
 </div>
 
 <script>
 const tg = window.Telegram?.WebApp;
 if (tg) { tg.ready(); tg.expand(); }
-
 const user = tg?.initDataUnsafe?.user;
-const userId = user?.id;
+const LOGO = "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA0MDAgNDAwIiB3aWR0aD0iNDAwIiBoZWlnaHQ9IjQwMCI+CiAgPGRlZnM+CiAgICA8bGluZWFyR3JhZGllbnQgaWQ9ImJnIiB4MT0iMCUiIHkxPSIwJSIgeDI9IjEwMCUiIHkyPSIxMDAlIj4KICAgICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3R5bGU9InN0b3AtY29sb3I6IzBiMGYxZSIvPgogICAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0eWxlPSJzdG9wLWNvbG9yOiMxMTE4MjciLz4KICAgIDwvbGluZWFyR3JhZGllbnQ+CiAgICA8bGluZWFyR3JhZGllbnQgaWQ9ImdvbGQiIHgxPSIwJSIgeTE9IjAlIiB4Mj0iMTAwJSIgeTI9IjEwMCUiPgogICAgICA8c3RvcCBvZmZzZXQ9IjAlIiBzdHlsZT0ic3RvcC1jb2xvcjojRkZENzAwIi8+CiAgICAgIDxzdG9wIG9mZnNldD0iNTAlIiBzdHlsZT0ic3RvcC1jb2xvcjojRkZBNTAwIi8+CiAgICAgIDxzdG9wIG9mZnNldD0iMTAwJSIgc3R5bGU9InN0b3AtY29sb3I6I0ZGOEMwMCIvPgogICAgPC9saW5lYXJHcmFkaWVudD4KICAgIDxsaW5lYXJHcmFkaWVudCBpZD0iZ3JlZW4iIHgxPSIwJSIgeTE9IjAlIiB4Mj0iMTAwJSIgeTI9IjAlIj4KICAgICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3R5bGU9InN0b3AtY29sb3I6IzAwZjVhMCIvPgogICAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0eWxlPSJzdG9wLWNvbG9yOiMwMGQ5ZjUiLz4KICAgIDwvbGluZWFyR3JhZGllbnQ+CiAgICA8bGluZWFyR3JhZGllbnQgaWQ9InJlZCIgeDE9IjAlIiB5MT0iMCUiIHgyPSIxMDAlIiB5Mj0iMCUiPgogICAgICA8c3RvcCBvZmZzZXQ9IjAlIiBzdHlsZT0ic3RvcC1jb2xvcjojZmY0MTZjIi8+CiAgICAgIDxzdG9wIG9mZnNldD0iMTAwJSIgc3R5bGU9InN0b3AtY29sb3I6I2ZmNGIyYiIvPgogICAgPC9saW5lYXJHcmFkaWVudD4KICAgIDxsaW5lYXJHcmFkaWVudCBpZD0iYXJlYUdyYWQiIHgxPSIwJSIgeTE9IjAlIiB4Mj0iMCUiIHkyPSIxMDAlIj4KICAgICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3R5bGU9InN0b3AtY29sb3I6IzAwZjVhMDtzdG9wLW9wYWNpdHk6MC4yNSIvPgogICAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0eWxlPSJzdG9wLWNvbG9yOiMwMGY1YTA7c3RvcC1vcGFjaXR5OjAiLz4KICAgIDwvbGluZWFyR3JhZGllbnQ+CiAgICA8ZmlsdGVyIGlkPSJnbG93IiB4PSItMjAlIiB5PSItMjAlIiB3aWR0aD0iMTQwJSIgaGVpZ2h0PSIxNDAlIj4KICAgICAgPGZlR2F1c3NpYW5CbHVyIHN0ZERldmlhdGlvbj0iMi41IiByZXN1bHQ9ImJsdXIiLz4KICAgICAgPGZlTWVyZ2U+PGZlTWVyZ2VOb2RlIGluPSJibHVyIi8+PGZlTWVyZ2VOb2RlIGluPSJTb3VyY2VHcmFwaGljIi8+PC9mZU1lcmdlPgogICAgPC9maWx0ZXI+CiAgICA8ZmlsdGVyIGlkPSJiaWdnbG93IiB4PSItNDAlIiB5PSItNDAlIiB3aWR0aD0iMTgwJSIgaGVpZ2h0PSIxODAlIj4KICAgICAgPGZlR2F1c3NpYW5CbHVyIHN0ZERldmlhdGlvbj0iNiIgcmVzdWx0PSJibHVyIi8+CiAgICAgIDxmZU1lcmdlPjxmZU1lcmdlTm9kZSBpbj0iYmx1ciIvPjxmZU1lcmdlTm9kZSBpbj0iU291cmNlR3JhcGhpYyIvPjwvZmVNZXJnZT4KICAgIDwvZmlsdGVyPgogICAgPGNsaXBQYXRoIGlkPSJjYyI+PGNpcmNsZSBjeD0iMjAwIiBjeT0iMjAwIiByPSIxODgiLz48L2NsaXBQYXRoPgogIDwvZGVmcz4KCiAgPCEtLSBPdXRlciByaW5nIC0tPgogIDxjaXJjbGUgY3g9IjIwMCIgY3k9IjIwMCIgcj0iMTk2IiBmaWxsPSIjMWEyMjM1Ii8+CiAgPGNpcmNsZSBjeD0iMjAwIiBjeT0iMjAwIiByPSIxOTIiIGZpbGw9InVybCgjYmcpIi8+CgogIDwhLS0gU3VidGxlIGFyYyBkZWNvcmF0aW9uIHRvcCAtLT4KICA8cGF0aCBkPSJNIDYwLDIwMCBBIDE0MCwxNDAgMCAwLDEgMzQwLDIwMCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJ1cmwoI2dvbGQpIiBzdHJva2Utd2lkdGg9IjEiIG9wYWNpdHk9IjAuMTUiIGNsaXAtcGF0aD0idXJsKCNjYykiLz4KCiAgPCEtLSBHcmlkIC0tPgogIDxnIGNsaXAtcGF0aD0idXJsKCNjYykiIG9wYWNpdHk9IjAuMDYiIHN0cm9rZT0iIzAwZjVhMCIgc3Ryb2tlLXdpZHRoPSIwLjgiPgogICAgPGxpbmUgeDE9IjAiIHkxPSIxMzAiIHgyPSI0MDAiIHkyPSIxMzAiLz4KICAgIDxsaW5lIHgxPSIwIiB5MT0iMTc1IiB4Mj0iNDAwIiB5Mj0iMTc1Ii8+CiAgICA8bGluZSB4MT0iMCIgeTE9IjIyMCIgeDI9IjQwMCIgeTI9IjIyMCIvPgogICAgPGxpbmUgeDE9IjAiIHkxPSIyNjUiIHgyPSI0MDAiIHkyPSIyNjUiLz4KICAgIDxsaW5lIHgxPSI5NSIgeTE9IjkwIiB4Mj0iOTUiIHkyPSIzMDAiLz4KICAgIDxsaW5lIHgxPSIxNDgiIHkxPSI5MCIgeDI9IjE0OCIgeTI9IjMwMCIvPgogICAgPGxpbmUgeDE9IjIwMSIgeTE9IjkwIiB4Mj0iMjAxIiB5Mj0iMzAwIi8+CiAgICA8bGluZSB4MT0iMjU0IiB5MT0iOTAiIHgyPSIyNTQiIHkyPSIzMDAiLz4KICAgIDxsaW5lIHgxPSIzMDciIHkxPSI5MCIgeDI9IjMwNyIgeTI9IjMwMCIvPgogIDwvZz4KCiAgPCEtLSBBcmVhIGZpbGwgdW5kZXIgY2hhcnQgLS0+CiAgPHBvbHlnb24KICAgIHBvaW50cz0iNzUsMjU1IDExNSwyMTUgMTQ4LDIzMiAxODMsMTY4IDIxOCwxODggMjUzLDEzOCAyOTUsMTUyIDI5NSwyNzUgNzUsMjc1IgogICAgZmlsbD0idXJsKCNhcmVhR3JhZCkiCiAgICBjbGlwLXBhdGg9InVybCgjY2MpIgogIC8+CgogIDwhLS0gQ2hhcnQgbGluZSAtLT4KICA8cG9seWxpbmUKICAgIHBvaW50cz0iNzUsMjU1IDExNSwyMTUgMTQ4LDIzMiAxODMsMTY4IDIxOCwxODggMjUzLDEzOCAyOTUsMTUyIgogICAgZmlsbD0ibm9uZSIgc3Ryb2tlPSJ1cmwoI2dyZWVuKSIgc3Ryb2tlLXdpZHRoPSIzLjUiCiAgICBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiCiAgICBmaWx0ZXI9InVybCgjZ2xvdykiIGNsaXAtcGF0aD0idXJsKCNjYykiCiAgLz4KCiAgPCEtLSBDYW5kbGVzdGlja3MgLS0+CiAgPCEtLSAxIHJlZCAtLT4KICA8ZyBmaWx0ZXI9InVybCgjZ2xvdykiIGNsaXAtcGF0aD0idXJsKCNjYykiPgogICAgPGxpbmUgeDE9IjEwMCIgeTE9IjIwNSIgeDI9IjEwMCIgeTI9IjIyOCIgc3Ryb2tlPSJ1cmwoI3JlZCkiIHN0cm9rZS13aWR0aD0iMS41Ii8+CiAgICA8cmVjdCB4PSI5NC41IiB5PSIyMDkiIHdpZHRoPSIxMSIgaGVpZ2h0PSIxMyIgZmlsbD0idXJsKCNyZWQpIiByeD0iMS41Ii8+CiAgPC9nPgogIDwhLS0gMiBncmVlbiAtLT4KICA8ZyBmaWx0ZXI9InVybCgjZ2xvdykiIGNsaXAtcGF0aD0idXJsKCNjYykiPgogICAgPGxpbmUgeDE9IjEzMCIgeTE9IjIyMCIgeDI9IjEzMCIgeTI9IjI0MiIgc3Ryb2tlPSJ1cmwoI2dyZWVuKSIgc3Ryb2tlLXdpZHRoPSIxLjUiLz4KICAgIDxyZWN0IHg9IjEyNC41IiB5PSIyMjIiIHdpZHRoPSIxMSIgaGVpZ2h0PSIxMyIgZmlsbD0idXJsKCNncmVlbikiIHJ4PSIxLjUiLz4KICA8L2c+CiAgPCEtLSAzIGdyZWVuIC0tPgogIDxnIGZpbHRlcj0idXJsKCNnbG93KSIgY2xpcC1wYXRoPSJ1cmwoI2NjKSI+CiAgICA8bGluZSB4MT0iMTYzIiB5MT0iMTU3IiB4Mj0iMTYzIiB5Mj0iMTgwIiBzdHJva2U9InVybCgjZ3JlZW4pIiBzdHJva2Utd2lkdGg9IjEuNSIvPgogICAgPHJlY3QgeD0iMTU3LjUiIHk9IjE2MCIgd2lkdGg9IjExIiBoZWlnaHQ9IjE0IiBmaWxsPSJ1cmwoI2dyZWVuKSIgcng9IjEuNSIvPgogIDwvZz4KICA8IS0tIDQgcmVkIC0tPgogIDxnIGZpbHRlcj0idXJsKCNnbG93KSIgY2xpcC1wYXRoPSJ1cmwoI2NjKSI+CiAgICA8bGluZSB4MT0iMTk2IiB5MT0iMTc4IiB4Mj0iMTk2IiB5Mj0iMjAwIiBzdHJva2U9InVybCgjcmVkKSIgc3Ryb2tlLXdpZHRoPSIxLjUiLz4KICAgIDxyZWN0IHg9IjE5MC41IiB5PSIxODAiIHdpZHRoPSIxMSIgaGVpZ2h0PSIxMyIgZmlsbD0idXJsKCNyZWQpIiByeD0iMS41Ii8+CiAgPC9nPgogIDwhLS0gNSBncmVlbiAtLT4KICA8ZyBmaWx0ZXI9InVybCgjZ2xvdykiIGNsaXAtcGF0aD0idXJsKCNjYykiPgogICAgPGxpbmUgeDE9IjIyOSIgeTE9IjEyOCIgeDI9IjIyOSIgeTI9IjE1MiIgc3Ryb2tlPSJ1cmwoI2dyZWVuKSIgc3Ryb2tlLXdpZHRoPSIxLjUiLz4KICAgIDxyZWN0IHg9IjIyMy41IiB5PSIxMzEiIHdpZHRoPSIxMSIgaGVpZ2h0PSIxNSIgZmlsbD0idXJsKCNncmVlbikiIHJ4PSIxLjUiLz4KICA8L2c+CiAgPCEtLSA2IGdyZWVuIC0tPgogIDxnIGZpbHRlcj0idXJsKCNnbG93KSIgY2xpcC1wYXRoPSJ1cmwoI2NjKSI+CiAgICA8bGluZSB4MT0iMjYyIiB5MT0iMTQzIiB4Mj0iMjYyIiB5Mj0iMTY1IiBzdHJva2U9InVybCgjZ3JlZW4pIiBzdHJva2Utd2lkdGg9IjEuNSIvPgogICAgPHJlY3QgeD0iMjU2LjUiIHk9IjE0NSIgd2lkdGg9IjExIiBoZWlnaHQ9IjEzIiBmaWxsPSJ1cmwoI2dyZWVuKSIgcng9IjEuNSIvPgogIDwvZz4KCiAgPCEtLSBMaXZlIGRvdCAtLT4KICA8Y2lyY2xlIGN4PSIyOTUiIGN5PSIxNTIiIHI9IjEwIiBmaWxsPSIjMDBmNWEwIiBvcGFjaXR5PSIwLjE1IiBmaWx0ZXI9InVybCgjYmlnZ2xvdykiLz4KICA8Y2lyY2xlIGN4PSIyOTUiIGN5PSIxNTIiIHI9IjUuNSIgZmlsbD0iIzAwZjVhMCIgZmlsdGVyPSJ1cmwoI2dsb3cpIi8+CiAgPGNpcmNsZSBjeD0iMjk1IiBjeT0iMTUyIiByPSIyLjUiIGZpbGw9IiNmZmZmZmYiLz4KCiAgPCEtLSBBSSBicmFpbiBpY29uIChzaW1wbGlmaWVkKSAtLT4KICA8ZyB0cmFuc2Zvcm09InRyYW5zbGF0ZSg1MiwgNTIpIiBmaWx0ZXI9InVybCgjZ2xvdykiPgogICAgPGNpcmNsZSBjeD0iMCIgY3k9IjAiIHI9IjIyIiBmaWxsPSJub25lIiBzdHJva2U9InVybCgjZ29sZCkiIHN0cm9rZS13aWR0aD0iMS41IiBvcGFjaXR5PSIwLjYiLz4KICAgIDwhLS0gYnJhaW4gc2hhcGUgc2ltcGxpZmllZCBhcyBjaXJjdWl0IG5vZGVzIC0tPgogICAgPGNpcmNsZSBjeD0iMCIgY3k9Ii04IiByPSIzIiBmaWxsPSJ1cmwoI2dvbGQpIiBvcGFjaXR5PSIwLjgiLz4KICAgIDxjaXJjbGUgY3g9IjgiIGN5PSI0IiByPSIzIiBmaWxsPSJ1cmwoI2dvbGQpIiBvcGFjaXR5PSIwLjgiLz4KICAgIDxjaXJjbGUgY3g9Ii04IiBjeT0iNCIgcj0iMyIgZmlsbD0idXJsKCNnb2xkKSIgb3BhY2l0eT0iMC44Ii8+CiAgICA8bGluZSB4MT0iMCIgeTE9Ii01IiB4Mj0iOCIgeTI9IjQiIHN0cm9rZT0idXJsKCNnb2xkKSIgc3Ryb2tlLXdpZHRoPSIxIiBvcGFjaXR5PSIwLjYiLz4KICAgIDxsaW5lIHgxPSIwIiB5MT0iLTUiIHgyPSItOCIgeTI9IjQiIHN0cm9rZT0idXJsKCNnb2xkKSIgc3Ryb2tlLXdpZHRoPSIxIiBvcGFjaXR5PSIwLjYiLz4KICAgIDxsaW5lIHgxPSI4IiB5MT0iNCIgeDI9Ii04IiB5Mj0iNCIgc3Ryb2tlPSJ1cmwoI2dvbGQpIiBzdHJva2Utd2lkdGg9IjEiIG9wYWNpdHk9IjAuNiIvPgogIDwvZz4KCiAgPCEtLSBTaWduYWwgYmFkZ2UgdG9wIHJpZ2h0IC0tPgogIDxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKDMzMCwgNzUpIj4KICAgIDxjaXJjbGUgY3g9IjAiIGN5PSIwIiByPSIyMCIgZmlsbD0iIzFhMjIzNSIgc3Ryb2tlPSJ1cmwoI2dyZWVuKSIgc3Ryb2tlLXdpZHRoPSIxLjUiLz4KICAgIDx0ZXh0IHg9IjAiIHk9IjUiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIxMSIgZm9udC13ZWlnaHQ9ImJvbGQiCiAgICAgIGZpbGw9InVybCgjZ3JlZW4pIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIj5BSTwvdGV4dD4KICA8L2c+CgogIDwhLS0gQm90dG9tIGxhYmVsIC0tPgogIDwhLS0gRGFyayBwaWxsIGJhY2tncm91bmQgLS0+CiAgPHJlY3QgeD0iODAiIHk9IjI5NiIgd2lkdGg9IjI0MCIgaGVpZ2h0PSI2NCIgcng9IjMyIiBmaWxsPSIjMGQxMzIyIiBvcGFjaXR5PSIwLjkiLz4KICA8cmVjdCB4PSI4MiIgeT0iMjk4IiB3aWR0aD0iMjM2IiBoZWlnaHQ9IjYwIiByeD0iMzAiIGZpbGw9Im5vbmUiIHN0cm9rZT0idXJsKCNnb2xkKSIgc3Ryb2tlLXdpZHRoPSIxIiBvcGFjaXR5PSIwLjQiLz4KCiAgPHRleHQgeD0iMjAwIiB5PSIzMjMiIGZvbnQtZmFtaWx5PSInQXJpYWwgQmxhY2snLCBBcmlhbCwgc2Fucy1zZXJpZiIKICAgIGZvbnQtc2l6ZT0iMjIiIGZvbnQtd2VpZ2h0PSI5MDAiIGZpbGw9InVybCgjZ29sZCkiCiAgICB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBsZXR0ZXItc3BhY2luZz0iMyIgZmlsdGVyPSJ1cmwoI2dsb3cpIj5BTkFMSVo8L3RleHQ+CiAgPHRleHQgeD0iMjAwIiB5PSIzNDUiIGZvbnQtZmFtaWx5PSJBcmlhbCwgc2Fucy1zZXJpZiIKICAgIGZvbnQtc2l6ZT0iMTEiIGZvbnQtd2VpZ2h0PSI1MDAiIGZpbGw9IiM3YThmYTgiCiAgICB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBsZXR0ZXItc3BhY2luZz0iNSI+VFJBRElORyBCT1Q8L3RleHQ+CgogIDwhLS0gT3V0ZXIgYm9yZGVyIC0tPgogIDxjaXJjbGUgY3g9IjIwMCIgY3k9IjIwMCIgcj0iMTkyIiBmaWxsPSJub25lIiBzdHJva2U9InVybCgjZ29sZCkiIHN0cm9rZS13aWR0aD0iMS41IiBvcGFjaXR5PSIwLjMiLz4KICA8Y2lyY2xlIGN4PSIyMDAiIGN5PSIyMDAiIHI9IjE4OCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJ1cmwoI2dyZWVuKSIgc3Ryb2tlLXdpZHRoPSIwLjUiIG9wYWNpdHk9IjAuMiIvPgo8L3N2Zz4K";
 
-// Init
-if (user) {
-  document.getElementById('heroName').textContent = user.first_name || 'Trader';
+// Set logo everywhere
+document.querySelectorAll("img[alt='logo']").forEach(img => img.src = LOGO);
+if (user) document.getElementById("heroName").textContent = user.first_name || "Trader";
+document.getElementById("refCode").textContent = "REF" + (user?.id || "000000");
+
+// Language from Telegram
+const tgLang = tg?.initDataUnsafe?.user?.language_code || "uz";
+const langs = {
+  uz: { home:"Bosh", analyze:"Tahlil", premium:"Premium", calc:"Kalk", referral:"Referral", upload_title:"Grafik yuklang", upload_sub:"TradingView, Binance, MetaTrader...", analyzing:"Tahlil qilinmoqda", free:"bepul", analyses:"tahlil" },
+  ru: { home:"Главная", analyze:"Анализ", premium:"Премиум", calc:"Калк", referral:"Реферал", upload_title:"Загрузите график", upload_sub:"TradingView, Binance, MetaTrader...", analyzing:"Анализируется", free:"бесплатно", analyses:"анализов" },
+  en: { home:"Home", analyze:"Analyze", premium:"Premium", calc:"Calc", referral:"Referral", upload_title:"Upload chart", upload_sub:"TradingView, Binance, MetaTrader...", analyzing:"Analyzing", free:"free", analyses:"analyses" }
+};
+const L = langs[tgLang] || langs.uz;
+
+// Apply language
+document.querySelectorAll(".nav-label").forEach((el, i) => {
+  const keys = ["home","analyze","premium","calc","referral"];
+  if (keys[i]) el.textContent = L[keys[i]];
+});
+document.querySelector(".upload-title").textContent = L.upload_title;
+document.querySelector(".upload-sub").textContent = L.upload_sub;
+
+function showToast(msg) {
+  const t = document.getElementById("toast");
+  t.textContent = msg; t.classList.add("show");
+  setTimeout(() => t.classList.remove("show"), 2500);
 }
 
-// Page navigation
 function goPage(name) {
-  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-  document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
-  document.getElementById('page-' + name).classList.add('active');
-  const nav = document.getElementById('nav-' + name);
-  if (nav) nav.classList.add('active');
-  if (name === 'history') loadHistory();
-  if (name === 'referral') loadReferral();
+  document.querySelectorAll(".page").forEach(p => p.classList.remove("active"));
+  document.querySelectorAll(".nav-item").forEach(n => n.classList.remove("active"));
+  document.getElementById("page-" + name)?.classList.add("active");
+  document.getElementById("nav-" + name)?.classList.add("active");
+  if (name === "home") loadMarket();
 }
 
-// Send data to bot
-function sendAnalysis() {
-  if (tg) {
-    tg.sendData(JSON.stringify({ action: 'analyze' }));
+// Analyze image via Claude API
+async function analyzeImage(input) {
+  const file = input.files[0];
+  if (!file) return;
+
+  const result = document.getElementById("analysisResult");
+  const resultText = document.getElementById("resultText");
+  result.classList.add("show");
+  resultText.innerHTML = '<div class="analyzing"><div><span class="dot"></span><span class="dot"></span><span class="dot"></span></div><p>' + L.analyzing + '...</p></div>';
+
+  try {
+    const base64 = await new Promise((res, rej) => {
+      const reader = new FileReader();
+      reader.onload = () => res(reader.result.split(",")[1]);
+      reader.onerror = rej;
+      reader.readAsDataURL(file);
+    });
+
+    const prompts = {
+      uz: "Sen professional trading analistisan. Bu grafik haqida batafsil texnik tahlil qil: trend, support/resistance, signal (BUY/SELL/WAIT), Stop Loss va Take Profit. O'zbek tilida javob ber.",
+      ru: "Ты профессиональный торговый аналитик. Дай подробный технический анализ этого графика: тренд, поддержка/сопротивление, сигнал (BUY/SELL/WAIT), Stop Loss и Take Profit. Отвечай на русском.",
+      en: "You are a professional trading analyst. Give detailed technical analysis of this chart: trend, support/resistance, signal (BUY/SELL/WAIT), Stop Loss and Take Profit. Reply in English."
+    };
+
+    const response = await fetch("https://api.anthropic.com/v1/messages", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        model: "claude-sonnet-4-6",
+        max_tokens: 1000,
+        messages: [{
+          role: "user",
+          content: [
+            { type: "image", source: { type: "base64", media_type: file.type, data: base64 } },
+            { type: "text", text: prompts[tgLang] || prompts.uz }
+          ]
+        }]
+      })
+    });
+
+    const data = await response.json();
+    const text = data.content?.[0]?.text || "Xatolik yuz berdi";
+    resultText.textContent = text;
+
+    // Also notify bot
+    if (tg) tg.sendData(JSON.stringify({ action: "analyzed", result: text.substring(0, 100) }));
+
+  } catch(e) {
+    resultText.textContent = "Xatolik: " + e.message;
   }
-}
-
-function payStars() {
-  if (tg) tg.sendData(JSON.stringify({ action: 'pay_stars' }));
-}
-function payTon() {
-  if (tg) tg.sendData(JSON.stringify({ action: 'pay_ton' }));
-}
-function payCard() {
-  if (tg) tg.sendData(JSON.stringify({ action: 'pay_card' }));
 }
 
 // Calculator
 function calculate() {
-  const balance = parseFloat(document.getElementById('balance').value);
-  const riskPct = parseFloat(document.getElementById('riskPct').value);
-  const entry = parseFloat(document.getElementById('entry').value);
-  const sl = parseFloat(document.getElementById('sl').value);
-
-  if (!balance || !riskPct || !entry || !sl) {
-    alert('Barcha maydonlarni to\'ldiring!');
-    return;
-  }
-
+  const balance = parseFloat(document.getElementById("balance").value);
+  const riskPct = parseFloat(document.getElementById("riskPct").value);
+  const entry = parseFloat(document.getElementById("entry").value);
+  const sl = parseFloat(document.getElementById("sl").value);
+  if (!balance || !riskPct || !entry || !sl) { showToast("Barcha maydonlarni to'ldiring!"); return; }
   const riskAmount = (balance * riskPct / 100).toFixed(2);
   const slDist = Math.abs(entry - sl).toFixed(4);
   const isLong = entry > sl;
-  const dir = isLong ? '🟢 LONG (Buy)' : '🔴 SHORT (Sell)';
+  document.getElementById("rDir").textContent = isLong ? "🟢 LONG (Buy)" : "🔴 SHORT (Sell)";
+  document.getElementById("rRisk").textContent = "$" + riskAmount;
+  document.getElementById("rSLDist").textContent = slDist;
+  const d = parseFloat(slDist);
+  document.getElementById("rTP1").textContent = isLong ? (entry + d).toFixed(4) : (entry - d).toFixed(4);
+  document.getElementById("rTP2").textContent = isLong ? (entry + d*2).toFixed(4) : (entry - d*2).toFixed(4);
+  document.getElementById("rTP3").textContent = isLong ? (entry + d*3).toFixed(4) : (entry - d*3).toFixed(4);
+  document.getElementById("calcResult").classList.add("show");
+}
 
-  const tp1 = isLong ? (entry + parseFloat(slDist)).toFixed(4) : (entry - parseFloat(slDist)).toFixed(4);
-  const tp2 = isLong ? (entry + parseFloat(slDist) * 2).toFixed(4) : (entry - parseFloat(slDist) * 2).toFixed(4);
-  const tp3 = isLong ? (entry + parseFloat(slDist) * 3).toFixed(4) : (entry - parseFloat(slDist) * 3).toFixed(4);
+// Payment
+function payStars() { if (tg) tg.sendData(JSON.stringify({ action: "pay_stars" })); }
+function payTon() { if (tg) tg.sendData(JSON.stringify({ action: "pay_ton" })); }
+function payCard() { if (tg) tg.sendData(JSON.stringify({ action: "pay_card" })); }
 
-  document.getElementById('rDir').textContent = dir;
-  document.getElementById('rRisk').textContent = '$' + riskAmount;
-  document.getElementById('rSLDist').textContent = slDist + ' pip';
-  document.getElementById('rTP1').textContent = tp1;
-  document.getElementById('rTP2').textContent = tp2;
-  document.getElementById('rTP3').textContent = tp3;
-  document.getElementById('calcResult').classList.add('show');
+// Referral share
+function shareRef() {
+  const code = document.getElementById("refCode").textContent;
+  const text = "📊 Forex Analiz Bot — AI bilan grafik tahlil!\n\n🎁 Referal: " + code + "\n\nt.me/ForexAnalizBot?start=" + code;
+  if (tg) tg.openTelegramLink("https://t.me/share/url?url=https://t.me/ForexAnalizBot&text=" + encodeURIComponent(text));
 }
 
 // Market prices
 async function loadMarket() {
   try {
-    const res = await fetch('https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum&vs_currencies=usd&include_24hr_change=true');
-    const data = await res.json();
-    const btc = data.bitcoin;
-    const eth = data.ethereum;
-
-    document.getElementById('btcPrice').textContent = '$' + btc.usd.toLocaleString();
-    document.getElementById('btcChange').textContent = (btc.usd_24h_change > 0 ? '+' : '') + btc.usd_24h_change.toFixed(2) + '%';
-    document.getElementById('btcChange').className = 'm-change ' + (btc.usd_24h_change > 0 ? 'm-up' : 'm-down');
-
-    document.getElementById('ethPrice').textContent = '$' + eth.usd.toLocaleString();
-    document.getElementById('ethChange').textContent = (eth.usd_24h_change > 0 ? '+' : '') + eth.usd_24h_change.toFixed(2) + '%';
-    document.getElementById('ethChange').className = 'm-change ' + (eth.usd_24h_change > 0 ? 'm-up' : 'm-down');
-  } catch(e) {
-    document.getElementById('btcPrice').textContent = 'N/A';
-    document.getElementById('ethPrice').textContent = 'N/A';
-  }
-
+    const r = await fetch("https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum&vs_currencies=usd&include_24hr_change=true");
+    const d = await r.json();
+    document.getElementById("btcPrice").textContent = "$" + d.bitcoin.usd.toLocaleString();
+    document.getElementById("btcChange").textContent = (d.bitcoin.usd_24h_change > 0 ? "+" : "") + d.bitcoin.usd_24h_change.toFixed(2) + "%";
+    document.getElementById("btcChange").className = d.bitcoin.usd_24h_change > 0 ? "m-up" : "m-down";
+    document.getElementById("ethPrice").textContent = "$" + d.ethereum.usd.toLocaleString();
+    document.getElementById("ethChange").textContent = (d.ethereum.usd_24h_change > 0 ? "+" : "") + d.ethereum.usd_24h_change.toFixed(2) + "%";
+    document.getElementById("ethChange").className = d.ethereum.usd_24h_change > 0 ? "m-up" : "m-down";
+  } catch(e) {}
   try {
-    const fx = await fetch('https://api.frankfurter.app/latest?from=EUR&to=USD');
-    const fxd = await fx.json();
-    document.getElementById('eurPrice').textContent = fxd.rates.USD.toFixed(4);
-    document.getElementById('eurChange').textContent = 'Live';
-    document.getElementById('eurChange').className = 'm-change m-up';
-  } catch(e) {
-    document.getElementById('eurPrice').textContent = 'N/A';
-  }
-
-  document.getElementById('goldPrice').textContent = '~$3,300';
-  document.getElementById('goldChange').textContent = 'XAU/USD';
-  document.getElementById('goldChange').className = 'm-change m-up';
+    const r = await fetch("https://api.frankfurter.app/latest?from=EUR&to=USD");
+    const d = await r.json();
+    document.getElementById("eurPrice").textContent = d.rates.USD.toFixed(4);
+  } catch(e) {}
 }
 
-// History (sample data — real data from bot)
-function loadHistory() {
-  const list = document.getElementById('historyList');
-  const sample = [
-    { asset: 'XAUSGD', signal: 'sell', date: '2026-06-10', preview: 'Bearish trend davom etmoqda. Support: 5,500' },
-    { asset: 'BTC/USD', signal: 'buy', date: '2026-06-09', preview: 'Bullish breakout. Resistance: 68,000' },
-    { asset: 'EUR/USD', signal: 'wait', date: '2026-06-08', preview: 'Sideways harakat. Kanal ichida qolmoqda' },
-  ];
-
-  list.innerHTML = sample.map(h => `
-    <div class="history-item">
-      <div class="h-header">
-        <div class="h-asset">${h.asset}</div>
-        <div class="h-date">${h.date}</div>
-      </div>
-      <div class="h-signal sig-${h.signal}">${h.signal.toUpperCase()}</div>
-      <div class="h-preview">${h.preview}</div>
-    </div>
-  `).join('');
-}
-
-// Referral
-function loadReferral() {
-  const code = 'REF' + (userId || '12345');
-  document.getElementById('refCode').textContent = code;
-}
-
-function shareRef() {
-  const code = document.getElementById('refCode').textContent;
-  const text = `📊 Forex Analiz Bot — AI bilan grafik tahlil qiling!\n\n🎁 Mening referral kodum: ${code}\n\nBotga o'ting: https://t.me/ForexAnalizBot?start=${code}`;
-  if (tg) {
-    tg.openTelegramLink('https://t.me/share/url?url=https://t.me/ForexAnalizBot?start=' + code + '&text=' + encodeURIComponent(text));
-  }
-}
-
-// Set premium badge
-function checkPremium() {
-  // This would be loaded from bot data
-  const badge = document.getElementById('premiumBadge');
-  // If premium, show differently
-  // badge.textContent = '💎 PREMIUM';
-  // badge.style.background = 'var(--gold-dim)';
-  // badge.style.color = 'var(--gold)';
-  // badge.style.borderColor = 'var(--gold)';
-}
-
-// Load on start
 loadMarket();
-checkPremium();
-setInterval(loadMarket, 60000); // refresh every minute
+setInterval(loadMarket, 60000);
+
+// Profile init
+function loadProfile() {
+  if (user) {
+    document.getElementById("profileName").textContent = user.first_name + (user.last_name ? " " + user.last_name : "");
+    document.getElementById("profileUsername").textContent = user.username ? "@" + user.username : "";
+  }
+  document.getElementById("profileJoined").textContent = "Ro'yxatdan o'tgan: " + new Date().toLocaleDateString();
+}
+loadProfile();
+
 </script>
 </body>
 </html>
