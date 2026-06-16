@@ -297,3 +297,36 @@ async def _notify_admins_payment(message: Message, payment_id: int, amount: str,
             )
         except Exception:
             pass
+
+
+from aiogram.types import Message
+from aiogram.filters import Filter
+from aiogram import F
+
+@router.message(F.web_app_data)
+async def handle_webapp_data(message: Message, lang: str = "uz"):
+    import json
+    try:
+        data = json.loads(message.web_app_data.data)
+        action = data.get("action")
+        
+        if action == "analyze":
+            await message.answer(t(lang, "send_screenshot"))
+        elif action == "pay_stars":
+            from config import config
+            from database.db import get_setting
+            price_stars = await get_setting("premium_price_stars")
+            stars_amount = int(price_stars) if price_stars and price_stars.isdigit() else 299
+            await message.answer_invoice(
+                title="💎 Premium Obuna",
+                description="1 oylik cheksiz tahlil",
+                payload="premium_stars",
+                currency="XTR",
+                prices=[{"label": "Premium", "amount": stars_amount}]
+            )
+        elif action == "pay_ton":
+            await message.answer(t(lang, "card_payment"))
+        elif action == "pay_card":
+            await message.answer(t(lang, "card_payment"))
+    except Exception as e:
+        await message.answer(t(lang, "error"))
