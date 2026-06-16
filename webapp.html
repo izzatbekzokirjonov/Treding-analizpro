@@ -417,51 +417,11 @@ function goPage(name) {
 async function analyzeImage(input) {
   const file = input.files[0];
   if (!file) return;
-
-  const result = document.getElementById("analysisResult");
-  const resultText = document.getElementById("resultText");
-  result.classList.add("show");
-  resultText.innerHTML = '<div class="analyzing"><div><span class="dot"></span><span class="dot"></span><span class="dot"></span></div><p>' + L.analyzing + '...</p></div>';
-
-  try {
-    const base64 = await new Promise((res, rej) => {
-      const reader = new FileReader();
-      reader.onload = () => res(reader.result.split(",")[1]);
-      reader.onerror = rej;
-      reader.readAsDataURL(file);
-    });
-
-    const prompts = {
-      uz: "Sen professional trading analistisan. Bu grafik haqida batafsil texnik tahlil qil: trend, support/resistance, signal (BUY/SELL/WAIT), Stop Loss va Take Profit. O'zbek tilida javob ber.",
-      ru: "Ты профессиональный торговый аналитик. Дай подробный технический анализ этого графика: тренд, поддержка/сопротивление, сигнал (BUY/SELL/WAIT), Stop Loss и Take Profit. Отвечай на русском.",
-      en: "You are a professional trading analyst. Give detailed technical analysis of this chart: trend, support/resistance, signal (BUY/SELL/WAIT), Stop Loss and Take Profit. Reply in English."
-    };
-
-    const response = await fetch("https://api.anthropic.com/v1/messages", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        model: "claude-sonnet-4-6",
-        max_tokens: 1000,
-        messages: [{
-          role: "user",
-          content: [
-            { type: "image", source: { type: "base64", media_type: file.type, data: base64 } },
-            { type: "text", text: prompts[tgLang] || prompts.uz }
-          ]
-        }]
-      })
-    });
-
-    const data = await response.json();
-    const text = data.content?.[0]?.text || "Xatolik yuz berdi";
-    resultText.textContent = text;
-
-    // Also notify bot
-    if (tg) tg.sendData(JSON.stringify({ action: "analyzed", result: text.substring(0, 100) }));
-
-  } catch(e) {
-    resultText.textContent = "Xatolik: " + e.message;
+  
+  // Close webapp and tell user to send to bot
+  if (tg) {
+    tg.sendData(JSON.stringify({ action: "analyze" }));
+    tg.close();
   }
 }
 
