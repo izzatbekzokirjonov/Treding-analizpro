@@ -309,11 +309,9 @@ async def handle_webapp_data(message: Message, lang: str = "uz"):
     try:
         data = json.loads(message.web_app_data.data)
         action = data.get("action")
-        
         if action == "analyze":
             await message.answer(t(lang, "send_screenshot"))
         elif action == "pay_stars":
-            from config import config
             from database.db import get_setting
             price_stars = await get_setting("premium_price_stars")
             stars_amount = int(price_stars) if price_stars and price_stars.isdigit() else 299
@@ -322,11 +320,18 @@ async def handle_webapp_data(message: Message, lang: str = "uz"):
                 description="1 oylik cheksiz tahlil",
                 payload="premium_stars",
                 currency="XTR",
-                prices=[{"label": "Premium", "amount": stars_amount}]
+                prices=[LabeledPrice(label="Premium", amount=stars_amount)]
             )
         elif action == "pay_ton":
-            await message.answer(t(lang, "card_payment"))
+            from database.db import get_setting
+            ton = await get_setting("ton_wallet")
+            price = await get_setting("premium_price_ton")
+            await message.answer(f"💎 TON hamyon: <code>{ton}</code>\nMiqdor: <b>{price} TON</b>\n\nTo'lovdan keyin chek yuboring.")
         elif action == "pay_card":
-            await message.answer(t(lang, "card_payment"))
+            from database.db import get_setting
+            card = await get_setting("visa_card")
+            owner = await get_setting("visa_owner")
+            price = await get_setting("premium_price_uzs")
+            await message.answer(f"💳 Karta: <code>{card}</code>\nEgasi: <b>{owner}</b>\nSumma: <b>{price} so'm</b>\n\nTo'lovdan keyin chek yuboring.")
     except Exception as e:
         await message.answer(t(lang, "error"))
