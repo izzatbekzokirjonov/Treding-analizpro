@@ -446,9 +446,9 @@ function calculate() {
 }
 
 // Payment
-function payStars() { if (tg) { tg.sendData(JSON.stringify({ action: "pay_stars" })); } }
-function payTon() { if (tg) { tg.sendData(JSON.stringify({ action: "pay_ton" })); } }
-function payCard() { if (tg) { tg.sendData(JSON.stringify({ action: "pay_card" })); } }
+function payStars() { if (tg) { tg.close(); } window.location.href = "https://t.me/ForexAnalizBot?start=pay_stars"; }
+function payTon() { if (tg) { tg.close(); } window.location.href = "https://t.me/ForexAnalizBot?start=pay_ton"; }
+function payCard() { if (tg) { tg.close(); } window.location.href = "https://t.me/ForexAnalizBot?start=pay_card"; }
 
 // Referral share
 function shareRef() {
